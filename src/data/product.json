@@ -1,0 +1,344 @@
+[
+  {
+    "id": "americano-nong",
+    "displayName": "Americano Nóng",
+    "category": "coffee",
+    "price": 25000,
+    "priceText": "25.000 VNĐ",
+    "description": "Cà phê Americano nóng cổ điển với hương vị đậm đà từ espresso và nước nóng.",
+    "image": "/images/coffee/americano-nong.webp"
+  },
+  {
+    "id": "americano-da",
+    "displayName": "Americano Đá",
+    "category": "coffee",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Cà phê Americano đá tươi mát với hương vị cà phê nguyên chất.",
+    "image": "/images/coffee/americano.webp"
+  },
+  {
+    "id": "cappuccino-nong",
+    "displayName": "Cappuccino Nóng",
+    "category": "coffee",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Cà phê Cappuccino nóng với lớp bọt sữa mịn và hương vị cân bằng.",
+    "image": "/images/coffee/cappucino-nong.webp"
+  },
+  {
+    "id": "cappuccino-da",
+    "displayName": "Cappuccino Đá",
+    "category": "coffee",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Cà phê Cappuccino đá với lớp bọt sữa tươi mát.",
+    "image": "/images/coffee/cappuccino.webp"
+  },
+  {
+    "id": "latte-nong",
+    "displayName": "Latte Nóng",
+    "category": "coffee",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Cà phê Latte nóng với sữa hấp mịn và hương vị dịu nhẹ.",
+    "image": "/images/coffee/latte-nong.webp"
+  },
+  {
+    "id": "latte-da",
+    "displayName": "Latte Đá",
+    "category": "coffee",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Cà phê Latte đá với sữa tươi mát và hương vị cân bằng.",
+    "image": "/images/coffee/latte.webp"
+  },
+  {
+    "id": "caramel-macchiato-nong",
+    "displayName": "Caramel Macchiato Nóng",
+    "category": "coffee",
+    "price": 40000,
+    "priceText": "40.000 VNĐ",
+    "description": "Cà phê Caramel Macchiato nóng với sốt caramel ngọt ngào.",
+    "image": "/images/coffee/caramel-macchiato-nong.webp"
+  },
+  {
+    "id": "caramel-macchiato-da",
+    "displayName": "Caramel Macchiato Đá",
+    "category": "coffee",
+    "price": 45000,
+    "priceText": "45.000 VNĐ",
+    "description": "Cà phê Caramel Macchiato đá với sốt caramel tươi mát.",
+    "image": "/images/coffee/caramel-macchiato.webp"
+  },
+  {
+    "id": "espresso-nong",
+    "displayName": "Espresso Nóng",
+    "category": "coffee",
+    "price": 20000,
+    "priceText": "20.000 VNĐ",
+    "description": "Espresso nóng nguyên chất với hương vị cà phê đậm đà.",
+    "image": "/images/coffee/espresso-nong.webp"
+  },
+  {
+    "id": "phin-den-nong",
+    "displayName": "Phin Đen Nóng",
+    "category": "coffee",
+    "price": 15000,
+    "priceText": "15.000 VNĐ",
+    "description": "Cà phê phin đen nóng truyền thống Việt Nam với hương vị đậm đà.",
+    "image": "/images/coffee/phin-den-nong.webp"
+  },
+  {
+    "id": "phin-den-da",
+    "displayName": "Phin Đen Đá",
+    "category": "coffee",
+    "price": 20000,
+    "priceText": "20.000 VNĐ",
+    "description": "Cà phê phin đen đá truyền thống Việt Nam tươi mát.",
+    "image": "/images/coffee/phin-den-da.webp"
+  },
+  {
+    "id": "phin-sua-da",
+    "displayName": "Phin Sữa Đá",
+    "category": "coffee",
+    "price": 25000,
+    "priceText": "25.000 VNĐ",
+    "description": "Cà phê phin sữa đá truyền thống Việt Nam với sữa đặc ngọt ngào.",
+    "image": "/images/coffee/phin-sua-da.webp"
+  },
+  {
+    "id": "tra-sen-vang-nong",
+    "displayName": "Trà Sen Vàng Nóng",
+    "category": "tea",
+    "price": 25000,
+    "priceText": "25.000 VNĐ",
+    "description": "Trà sen vàng nóng với hương sen thơm ngát truyền thống.",
+    "image": "/images/coffee/tra-sen-vang-nong.webp"
+  },
+  {
+    "id": "tra-sen-vang-sen",
+    "displayName": "Trà Sen Vàng Sen",
+    "category": "tea",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Trà sen vàng với hạt sen tươi ngon và hương vị đặc biệt.",
+    "image": "/images/coffee/tra-sen-vang-sen.webp"
+  },
+  {
+    "id": "tra-sen-vang-da",
+    "displayName": "Trà Sen Vàng Đá",
+    "category": "tea",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Trà sen vàng đá tươi mát với hương sen dịu nhẹ.",
+    "image": "/images/coffee/tra-sen-vang.webp"
+  },
+  {
+    "id": "tra-thach-dao",
+    "displayName": "Trà Thạch Đào",
+    "category": "tea",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Trà thạch đào với thạch đào dai giòn và hương vị tươi mát.",
+    "image": "/images/coffee/tra-thach-dao.webp"
+  },
+  {
+    "id": "tra-thach-vai-nong",
+    "displayName": "Trà Thạch Vải Nóng",
+    "category": "tea",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Trà thạch vải nóng với thạch vải ngọt ngào.",
+    "image": "/images/coffee/tra-thach-vai-nong.webp"
+  },
+  {
+    "id": "tra-thach-vai-da",
+    "displayName": "Trà Thạch Vải Đá",
+    "category": "tea",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Trà thạch vải đá với thạch vải tươi mát.",
+    "image": "/images/coffee/tra-thach-vai.webp"
+  },
+  {
+    "id": "tra-thanh-dao-nong",
+    "displayName": "Trà Thanh Đào Nóng",
+    "category": "tea",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Trà thanh đào nóng với hương đào tươi mát.",
+    "image": "/images/coffee/tra-thanh-dao-nong.webp"
+  },
+  {
+    "id": "tra-thanh-dao-da",
+    "displayName": "Trà Thanh Đào Đá",
+    "category": "tea",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Trà thanh đào đá với hương đào tươi mát.",
+    "image": "/images/coffee/tra-thanh-dao.webp"
+  },
+  {
+    "id": "tra-xanh-dau-do-nong",
+    "displayName": "Trà Xanh Đậu Đỏ Nóng",
+    "category": "tea",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Trà xanh đậu đỏ nóng với đậu đỏ bùi bùi.",
+    "image": "/images/coffee/tra-xanh-dau-do-nong.webp"
+  },
+  {
+    "id": "tra-xanh-dau-do-da",
+    "displayName": "Trà Xanh Đậu Đỏ Đá",
+    "category": "tea",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Trà xanh đậu đỏ đá với đậu đỏ tươi mát.",
+    "image": "/images/coffee/tra-xanh-dau-do.webp"
+  },
+  {
+    "id": "tra-dau-tam",
+    "displayName": "Trà Đậu Tằm",
+    "category": "tea",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Trà đậu tằm với hương vị đậu tằm đặc trưng.",
+    "image": "/images/coffee/tra-dau-tam.webp"
+  },
+  {
+    "id": "classic-phin-freeze",
+    "displayName": "Classic Phin Freeze",
+    "category": "freeze",
+    "price": 45000,
+    "priceText": "45.000 VNĐ",
+    "description": "Đá xay phin cổ điển với hương vị cà phê phin đặc trưng.",
+    "image": "/images/coffee/classic-phin-freeze.webp"
+  },
+  {
+    "id": "freeze-caramel",
+    "displayName": "Freeze Caramel",
+    "category": "freeze",
+    "price": 50000,
+    "priceText": "50.000 VNĐ",
+    "description": "Đá xay caramel với sốt caramel ngọt ngào.",
+    "image": "/images/coffee/freeze-caramel.webp"
+  },
+  {
+    "id": "freeze-choco",
+    "displayName": "Freeze Choco",
+    "category": "freeze",
+    "price": 50000,
+    "priceText": "50.000 VNĐ",
+    "description": "Đá xay chocolate với hương vị chocolate đậm đà.",
+    "image": "/images/coffee/freeze-choco.webp"
+  },
+  {
+    "id": "freeze-cookies",
+    "displayName": "Freeze Cookies",
+    "category": "freeze",
+    "price": 50000,
+    "priceText": "50.000 VNĐ",
+    "description": "Đá xay cookies với bánh quy giòn tan.",
+    "image": "/images/coffee/freeze-cookies.webp"
+  },
+  {
+    "id": "freeze-kem-may-dau-tam",
+    "displayName": "Freeze Kem Máy Đậu Tằm",
+    "category": "freeze",
+    "price": 45000,
+    "priceText": "45.000 VNĐ",
+    "description": "Đá xay kem máy đậu tằm với kem mát lạnh.",
+    "image": "/images/coffee/freeze-kem-may-dau-tam.webp"
+  },
+  {
+    "id": "freeze-tra-xanh",
+    "displayName": "Freeze Trà Xanh",
+    "category": "freeze",
+    "price": 45000,
+    "priceText": "45.000 VNĐ",
+    "description": "Đá xay trà xanh với hương vị trà xanh tươi mát.",
+    "image": "/images/coffee/freeze-tra-xanh.webp"
+  },
+  {
+    "id": "banh-choux",
+    "displayName": "Bánh Choux",
+    "category": "cake",
+    "price": 25000,
+    "priceText": "25.000 VNĐ",
+    "description": "Bánh choux với kem tươi ngọt ngào và lớp vỏ giòn tan.",
+    "image": "/images/coffee/banh-choux.webp"
+  },
+  {
+    "id": "banh-chuoi",
+    "displayName": "Bánh Chuối",
+    "category": "cake",
+    "price": 20000,
+    "priceText": "20.000 VNĐ",
+    "description": "Bánh chuối với chuối tươi ngọt ngào và hương vị tự nhiên.",
+    "image": "/images/coffee/banh-chuoi.webp"
+  },
+  {
+    "id": "banh-croisaint",
+    "displayName": "Bánh Croissant",
+    "category": "cake",
+    "price": 30000,
+    "priceText": "30.000 VNĐ",
+    "description": "Bánh croissant với lớp vỏ giòn tan và bơ thơm ngon.",
+    "image": "/images/coffee/banh-croisaint.webp"
+  },
+  {
+    "id": "banh-mousse-ca-cao",
+    "displayName": "Bánh Mousse Cacao",
+    "category": "cake",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Bánh mousse cacao với kem mousse mịn màng và hương cacao đậm đà.",
+    "image": "/images/coffee/banh-mousse-ca-cao.webp"
+  },
+  {
+    "id": "banh-pho-mai-caramel",
+    "displayName": "Bánh Phô Mai Caramel",
+    "category": "cake",
+    "price": 40000,
+    "priceText": "40.000 VNĐ",
+    "description": "Bánh phô mai caramel với kem phô mai mịn và sốt caramel ngọt ngào.",
+    "image": "/images/coffee/banh-pho-mai-caramel.webp"
+  },
+  {
+    "id": "banh-pho-mai-chanh-day",
+    "displayName": "Bánh Phô Mai Chanh Dây",
+    "category": "cake",
+    "price": 40000,
+    "priceText": "40.000 VNĐ",
+    "description": "Bánh phô mai chanh dây với kem phô mai mịn và hương chanh dây tươi mát.",
+    "image": "/images/coffee/banh-pho-mai-chanh-day.webp"
+  },
+  {
+    "id": "banh-pho-mai-tra-xanh",
+    "displayName": "Bánh Phô Mai Trà Xanh",
+    "category": "cake",
+    "price": 40000,
+    "priceText": "40.000 VNĐ",
+    "description": "Bánh phô mai trà xanh với kem phô mai mịn và hương trà xanh dịu nhẹ.",
+    "image": "/images/coffee/banh-pho-mai-tra-xanh.webp"
+  },
+  {
+    "id": "banh-sua-chua-pho-mai",
+    "displayName": "Bánh Sữa Chua Phô Mai",
+    "category": "cake",
+    "price": 35000,
+    "priceText": "35.000 VNĐ",
+    "description": "Bánh sữa chua phô mai với kem sữa chua mịn và phô mai thơm ngon.",
+    "image": "/images/coffee/banh-sua-chua-pho-mai.webp"
+  },
+  {
+    "id": "banh-tiramisu",
+    "displayName": "Bánh Tiramisu",
+    "category": "cake",
+    "price": 45000,
+    "priceText": "45.000 VNĐ",
+    "description": "Bánh tiramisu với kem mascarpone mịn và hương cà phê đậm đà.",
+    "image": "/images/coffee/banh-tiramisu.webp"
+  }
+]
