@@ -4,6 +4,10 @@ import App from './App.tsx';
 import './index.css';
 import './styles/responsive.css';
 import './styles/mobile.css';
+import './styles/performance.css';
+import './styles/high-refresh.css';
+import './styles/native.css';
+import { initPerformanceOptimizations } from './utils/performance';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter } from 'react-router-dom';
 
