@@ -29,6 +29,12 @@ const CartPage = lazy(() => import('@/pages/CartPage/CartPage'));
 const CheckoutPage = lazy(() => import('@/pages/CheckoutPage/CheckoutPage'));
 const ProductDetailPage = lazy(() => import('@/pages/ProductDetailPage'));
 
+// New Professional Pages
+const SearchResultsPage = lazy(() => import('./pages/SearchResultsPage'));
+const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage'));
+const LoyaltyPage = lazy(() => import('./pages/LoyaltyPage'));
+const MobileAppPage = lazy(() => import('./pages/MobileAppPage'));
+
 // Admin pages - Lazy load as they're less frequently accessed
 const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage'));
 const StockManagementPage = lazy(() => import('@/pages/admin/StockManagementPage'));
@@ -72,6 +78,12 @@ export default function Router() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
+          
+          {/* New Professional Pages */}
+          <Route path="/search" element={<SearchResultsPage />} />
+          <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/loyalty" element={<LoyaltyPage />} />
+          <Route path="/mobile-app" element={<MobileAppPage />} />
 
           {/* Admin Routes - Lazy loaded */}
           <Route path="/admin" element={<AdminDashboardPage />}>
