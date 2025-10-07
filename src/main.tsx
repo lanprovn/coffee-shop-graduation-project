@@ -8,6 +8,7 @@ import './styles/performance.css';
 import './styles/high-refresh.css';
 import './styles/native.css';
 import './styles/mobile-first.css';
+import './styles/apk-compatibility.css';
 import { initPerformanceOptimizations } from './utils/performance';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter } from 'react-router-dom';
