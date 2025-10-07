@@ -10,6 +10,7 @@ import Title1 from '@/components/shared/typo/Title1';
 import Title3 from '@/components/shared/typo/Title3';
 import CounterInputSm from '@/components/shared/CounterInputSm';
 import { TrashIcon, TruckIcon, BuildingStorefrontIcon } from '@heroicons/react/24/outline';
+import BackButtonWithText from '@/components/shared/BackButton';
 
 /**
  * CartPage: Trang giỏ hàng với UX được cải thiện
@@ -57,6 +58,11 @@ export default function CartPage() {
   if (itemCount === 0) {
     return (
       <div className="max-w-screen-lg mx-auto p-4 mt-20">
+        {/* Back Button */}
+        <div className="mb-4">
+          <BackButtonWithText text="Tiếp tục mua sắm" />
+        </div>
+        
         <div className="text-center py-16">
           <div className="text-8xl mb-6">🛒</div>
           <Title1 className="text-gray-800 mb-4">Giỏ hàng trống</Title1>
@@ -78,6 +84,11 @@ export default function CartPage() {
 
   return (
     <div className="max-w-screen-lg mx-auto p-4 mt-20">
+      {/* Back Button */}
+      <div className="mb-4">
+        <BackButtonWithText text="Tiếp tục mua sắm" />
+      </div>
+      
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>

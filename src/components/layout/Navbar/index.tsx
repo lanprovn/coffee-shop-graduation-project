@@ -17,6 +17,8 @@ import NotificationCenter from '@/components/shared/NotificationCenter';
 import { useProduct } from '@/hooks/useProduct';
 import { ProductCategory } from '@/types';
 import { useDebounce, useOptimizedCallback } from '@/hooks/usePerformance';
+import BackButton from '@/components/shared/BackButton';
+import { useIsMobile } from '@/hooks/useMobileBack';
 
 export default function Navbar() {
   const { user } = useAuth();
@@ -74,8 +76,12 @@ export default function Navbar() {
         <div className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="flex items-center justify-between h-12 sm:h-14 lg:h-16">
 
-            {/* Mobile menu button */}
-            <div className="flex items-center lg:hidden">
+            {/* Mobile controls */}
+            <div className="flex items-center lg:hidden gap-2">
+              {/* Back Button - chỉ hiển thị khi không ở trang chủ */}
+              {pathname !== '/' && <BackButton />}
+              
+              {/* Mobile menu button */}
               <button
                 onClick={toggleMobileMenu}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"

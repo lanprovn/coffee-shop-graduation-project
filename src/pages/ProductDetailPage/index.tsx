@@ -13,6 +13,7 @@ import PageLoading from '@/components/shared/PageLoading';
 import ProductRatingDisplay from './ProductRatingDisplay';
 import ReviewForm from './ReviewForm';
 import ReviewList from './ReviewList';
+import BackButtonWithText from '@/components/shared/BackButton';
 
 /**
  * Trang chi tiết sản phẩm với đánh giá và review
@@ -77,6 +78,11 @@ export default function ProductDetailPage() {
 
     return (
         <div className="max-w-screen-sm mx-auto p-4 mt-20">
+            {/* Back Button */}
+            <div className="mb-4">
+                <BackButtonWithText text="Quay lại danh sách" />
+            </div>
+            
             {/* Thông tin sản phẩm */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <img
