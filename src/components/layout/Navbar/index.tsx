@@ -54,7 +54,7 @@ export default function Navbar() {
   const filteredCategories = useMemo(() => {
     return Array.from(new Set(coffees.map(p => p.category)))
       .filter(cat => {
-        if (!debouncedMenuQuery.trim()) return true;
+        if (!debouncedMenuQuery || typeof debouncedMenuQuery !== 'string' || !debouncedMenuQuery.trim()) return true;
         const viName = ((): string => {
           switch (cat as ProductCategory) {
             case ProductCategory.Coffee: return 'Cà phê';
