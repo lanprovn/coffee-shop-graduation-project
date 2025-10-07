@@ -35,6 +35,14 @@ const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage'));
 const LoyaltyPage = lazy(() => import('./pages/LoyaltyPage'));
 const MobileAppPage = lazy(() => import('./pages/MobileAppPage'));
 
+// New Advanced Features
+const WishlistPage = lazy(() => import('./hooks/useWishlist').then(m => ({ default: m.WishlistPage })));
+const ProductComparisonPage = lazy(() => import('./hooks/useProductComparison').then(m => ({ default: m.ProductComparisonPage })));
+const RecentViewedPage = lazy(() => import('./hooks/useRecentViewed').then(m => ({ default: m.RecentViewedPage })));
+const RecommendationsPage = lazy(() => import('./hooks/useProductRecommendations').then(m => ({ default: m.RecommendationsPage })));
+const BulkOrderPage = lazy(() => import('./hooks/useBulkOrder').then(m => ({ default: m.BulkOrderForm })));
+const AdvancedAnalyticsPage = lazy(() => import('./hooks/useAdvancedAnalytics').then(m => ({ default: m.AdvancedAnalyticsDashboard })));
+
 // Admin pages - Lazy load as they're less frequently accessed
 const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage'));
 const StockManagementPage = lazy(() => import('@/pages/admin/StockManagementPage'));
@@ -84,6 +92,14 @@ export default function Router() {
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/loyalty" element={<LoyaltyPage />} />
           <Route path="/mobile-app" element={<MobileAppPage />} />
+
+          {/* New Advanced Features */}
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/compare" element={<ProductComparisonPage />} />
+          <Route path="/recent-viewed" element={<RecentViewedPage />} />
+          <Route path="/recommendations" element={<RecommendationsPage />} />
+          <Route path="/bulk-order" element={<BulkOrderPage />} />
+          <Route path="/advanced-analytics" element={<AdvancedAnalyticsPage />} />
 
           {/* Admin Routes - Lazy loaded */}
           <Route path="/admin" element={<AdminDashboardPage />}>
