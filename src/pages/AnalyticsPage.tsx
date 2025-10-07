@@ -5,14 +5,14 @@ import Title2 from '@/components/shared/typo/Title2';
 import Title3 from '@/components/shared/typo/Title3';
 import ButtonFilled from '@/components/shared/button/ButtonFilled';
 import ButtonOutline from '@/components/shared/button/ButtonOutline';
-import { 
-  ChartBarIcon, 
-  ShoppingBagIcon, 
+import {
+  ChartBarIcon,
+  ShoppingBagIcon,
   CurrencyDollarIcon,
   ClockIcon,
   StarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon
+  ArrowUpIcon,
+  ArrowDownIcon
 } from '@heroicons/react/24/outline';
 
 /**
@@ -73,13 +73,12 @@ export default function AnalyticsPage() {
         <div className="flex items-center space-x-2">
           {icon}
           {trend && (
-            <div className={`flex items-center text-sm ${
-              trend === 'up' ? 'text-green-600' : 'text-red-600'
-            }`}>
+            <div className={`flex items-center text-sm ${trend === 'up' ? 'text-green-600' : 'text-red-600'
+              }`}>
               {trend === 'up' ? (
-                <TrendingUpIcon className="w-4 h-4 mr-1" />
+                <ArrowUpIcon className="w-4 h-4 mr-1" />
               ) : (
-                <TrendingDownIcon className="w-4 h-4 mr-1" />
+                <ArrowDownIcon className="w-4 h-4 mr-1" />
               )}
               {trendValue}
             </div>
@@ -106,7 +105,7 @@ export default function AnalyticsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
+
         {/* Header */}
         <div className="mb-8">
           <Title1 className="text-gray-800 mb-2">Thống kê cá nhân</Title1>
@@ -167,7 +166,7 @@ export default function AnalyticsPage() {
 
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          
+
           {/* Monthly Trend */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <Title2 className="text-gray-800 mb-4">Xu hướng mua hàng</Title2>
@@ -197,7 +196,7 @@ export default function AnalyticsPage() {
                     <span className="text-sm text-gray-500">{item.count} đơn ({item.percentage}%)</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-primary h-2 rounded-full transition-all duration-300"
                       style={{ width: `${item.percentage}%` }}
                     ></div>
@@ -215,7 +214,7 @@ export default function AnalyticsPage() {
             <div className="flex items-start space-x-3">
               <div className="flex-shrink-0">
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <TrendingUpIcon className="w-4 h-4 text-blue-600" />
+                  <ArrowUpIcon className="w-4 h-4 text-blue-600" />
                 </div>
               </div>
               <div>
@@ -225,7 +224,7 @@ export default function AnalyticsPage() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <div className="flex-shrink-0">
                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
