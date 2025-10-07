@@ -19,11 +19,14 @@ import {
   ShieldCheckIcon,
   HeartIcon
 } from '@heroicons/react/24/outline';
+import { useOptimizedCallback, useOptimizedMemo } from '@/hooks/usePerformance';
+import { memo } from 'react';
 
-export default function HomePage() {
+function HomePage() {
   const navigate = useNavigate();
 
-  const features = [
+  // Memoized features data
+  const features = useOptimizedMemo(() => [
     {
       icon: <SparklesIcon className="w-8 h-8" />,
       title: "Cà phê chất lượng cao",
@@ -44,14 +47,25 @@ export default function HomePage() {
       title: "Đảm bảo chất lượng",
       description: "Cam kết đồ uống tươi ngon và đóng gói an toàn"
     }
-  ];
+  ], []);
 
-  const stats = [
+  // Memoized stats data
+  const stats = useOptimizedMemo(() => [
     { number: "30+", label: "Sản phẩm đa dạng" },
     { number: "12", label: "Chi nhánh" },
     { number: "10K+", label: "Khách hàng hài lòng" },
     { number: "4.8", label: "Đánh giá trung bình" }
-  ];
+  ], []);
+
+  // Optimized navigation callbacks
+  const navigateToProducts = useOptimizedCallback((category?: string) => {
+    const url = category ? `/products?category=${category}` : '/products';
+    navigate(url);
+  }, [navigate]);
+
+  const navigateToStores = useOptimizedCallback(() => {
+    navigate('/stores');
+  }, [navigate]);
 
   return (
     <div className="bg-gray-50 min-h-screen main-content">
@@ -132,28 +146,28 @@ export default function HomePage() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-8">
           <ButtonFilled
-            onClick={() => navigate('/products?category=coffee')}
+            onClick={() => navigateToProducts('coffee')}
             className="mobile-btn h-16 sm:h-18 lg:h-20 flex flex-col items-center justify-center gap-1 sm:gap-2"
           >
             <SparklesIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             <span className="text-xs sm:text-sm font-medium">Cà phê</span>
           </ButtonFilled>
           <ButtonFilled
-            onClick={() => navigate('/products?category=tea')}
+            onClick={() => navigateToProducts('tea')}
             className="mobile-btn h-16 sm:h-18 lg:h-20 flex flex-col items-center justify-center gap-1 sm:gap-2"
           >
             <HeartIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             <span className="text-xs sm:text-sm font-medium">Trà</span>
           </ButtonFilled>
           <ButtonFilled
-            onClick={() => navigate('/products?category=freeze')}
+            onClick={() => navigateToProducts('freeze')}
             className="mobile-btn h-16 sm:h-18 lg:h-20 flex flex-col items-center justify-center gap-1 sm:gap-2"
           >
             <StarIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             <span className="text-xs sm:text-sm font-medium">Đá xay</span>
           </ButtonFilled>
           <ButtonFilled
-            onClick={() => navigate('/products?category=cake')}
+            onClick={() => navigateToProducts('cake')}
             className="mobile-btn h-16 sm:h-18 lg:h-20 flex flex-col items-center justify-center gap-1 sm:gap-2"
           >
             <CakeIcon className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -178,13 +192,13 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <ButtonFilled
-              onClick={() => navigate('/products')}
+              onClick={() => navigateToProducts()}
               className="mobile-btn bg-white text-primary hover:bg-gray-100 px-6 sm:px-8 py-3"
             >
               Xem toàn bộ menu
             </ButtonFilled>
             <ButtonFilled
-              onClick={() => navigate('/stores')}
+              onClick={navigateToStores}
               className="mobile-btn border-2 border-white text-white hover:bg-white hover:text-primary px-6 sm:px-8 py-3"
             >
               Tìm cửa hàng gần nhất
@@ -195,3 +209,6 @@ export default function HomePage() {
     </div>
   );
 }
+
+// Memoize HomePage to prevent unnecessary re-renders
+export default memo(HomePage);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   UserIcon,
@@ -16,6 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 import NotificationCenter from '@/components/shared/NotificationCenter';
 import { useProduct } from '@/hooks/useProduct';
 import { ProductCategory } from '@/types';
+import { useDebounce, useOptimizedCallback } from '@/hooks/usePerformance';
 
 export default function Navbar() {
   const { user } = useAuth();
@@ -30,20 +31,42 @@ export default function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [menuQuery, setMenuQuery] = useState('');
 
-  const handleCartClick = () => {
+  // Optimized callbacks
+  const handleCartClick = useOptimizedCallback(() => {
     if (itemCount > 0) {
       navigate('/cart');
     } else {
       showCartModal();
     }
-  };
+  }, [itemCount, navigate, showCartModal]);
 
-  const handelDrawerOpen = () => setShowDrawer(true);
-  const handelDrawerClose = () => setShowDrawer(false);
+  const handelDrawerOpen = useOptimizedCallback(() => setShowDrawer(true), []);
+  const handelDrawerClose = useOptimizedCallback(() => setShowDrawer(false), []);
 
-  const isActive = (to: string) => pathname.startsWith(to);
+  const isActive = useOptimizedCallback((to: string) => pathname.startsWith(to), [pathname]);
 
-  const toggleMobileMenu = () => setShowMobileMenu(!showMobileMenu);
+  const toggleMobileMenu = useOptimizedCallback(() => setShowMobileMenu(!showMobileMenu), [showMobileMenu]);
+
+  // Debounced menu query
+  const debouncedMenuQuery = useDebounce(menuQuery, 300);
+
+  // Memoized filtered categories
+  const filteredCategories = useMemo(() => {
+    return Array.from(new Set(coffees.map(p => p.category)))
+      .filter(cat => {
+        if (!debouncedMenuQuery.trim()) return true;
+        const viName = ((): string => {
+          switch (cat as ProductCategory) {
+            case ProductCategory.Coffee: return 'Cà phê';
+            case ProductCategory.Tea: return 'Trà';
+            case ProductCategory.Freeze: return 'Đá xay / Freeze';
+            case ProductCategory.Cake: return 'Bánh ngọt';
+            default: return String(cat);
+          }
+        })();
+        return viName.toLowerCase().includes(debouncedMenuQuery.toLowerCase());
+      });
+  }, [coffees, debouncedMenuQuery]);
 
   return (
     <>
@@ -129,21 +152,7 @@ export default function Navbar() {
                         </div>
                       </div>
                       <ul className="py-2 text-gray-700 text-sm font-medium max-h-80 overflow-auto">
-                        {Array.from(new Set(coffees.map(p => p.category)))
-                          .filter(cat => {
-                            if (!menuQuery.trim()) return true;
-                            const viName = ((): string => {
-                              switch (cat as ProductCategory) {
-                                case ProductCategory.Coffee: return 'Cà phê';
-                                case ProductCategory.Tea: return 'Trà';
-                                case ProductCategory.Freeze: return 'Đá xay / Freeze';
-                                case ProductCategory.Cake: return 'Bánh ngọt';
-                                default: return String(cat);
-                              }
-                            })();
-                            return viName.toLowerCase().includes(menuQuery.toLowerCase());
-                          })
-                          .map((cat) => {
+                        {filteredCategories.map((cat) => {
                             const first = coffees.find(p => p.category === cat);
                             const img = first?.image || '/images/app-logo.png';
                             const viName = ((): string => {
