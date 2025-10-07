@@ -48,8 +48,8 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="flex items-center justify-between h-12 sm:h-14 lg:h-16">
 
             {/* Mobile menu button */}
             <div className="flex items-center lg:hidden">
@@ -67,14 +67,14 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Logo */}
+            {/* Logo - Mobile Optimized */}
             <div className="flex-shrink-0 flex items-center">
               <Link
                 to="/"
-                className="flex items-center space-x-2 focus:outline-none text-primary hover:opacity-80"
+                className="flex items-center space-x-1 sm:space-x-2 focus:outline-none text-primary hover:opacity-80"
               >
-                <img src="/images/app-logo.svg" className="h-8" alt="Logo ứng dụng" />
-                <span className="font-semibold whitespace-nowrap text-lg hidden sm:block">
+                <img src="/images/app-logo.svg" className="h-6 sm:h-7 lg:h-8" alt="Logo ứng dụng" />
+                <span className="font-semibold whitespace-nowrap text-sm sm:text-base lg:text-lg hidden xs:block">
                   {APP_NAME}
                 </span>
               </Link>

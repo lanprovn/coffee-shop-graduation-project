@@ -8,9 +8,9 @@ export default function AppLayout() {
       {/* Navbar cố định */}
       <Navbar />
 
-      {/* Nội dung chính */}
-      <main className="flex-1 w-full max-w-screen-2xl mx-auto pt-24 pb-12 px-2 sm:px-4 lg:px-6">
-        <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-3 sm:p-4 lg:p-6">
+      {/* Nội dung chính - Mobile Optimized */}
+      <main className="flex-1 w-full max-w-screen-2xl mx-auto pt-16 sm:pt-20 lg:pt-24 pb-4 sm:pb-8 lg:pb-12 px-1 sm:px-2 lg:px-6">
+        <div className="bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-[0_2px_8px_rgba(0,0,0,0.05)] sm:shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-2 sm:p-3 lg:p-6">
           <Outlet />
         </div>
       </main>
