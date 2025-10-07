@@ -12,9 +12,9 @@ Welcome to the CoffeeShop E-Commerce Website, a sample React application showcas
 
 - **Checkout Process**: A simplified checkout process allows users to enter their shipping information and complete the purchase. For the sake of this sample, no actual payment processing is implemented.
 
-- **User Authentication**: Implement Google Login for user authentication. This provides a secure and convenient way for users to create accounts and log in.
+- **User Authentication**: Mock user authentication system for demonstration purposes.
 
-- **Map Integration**: Utilize Mapbox to display the location of the coffee shop, providing users with a visual reference.
+- **Map Integration**: Mock map integration for displaying coffee shop locations.
 
 ## Technologies Used
 
@@ -28,7 +28,7 @@ Welcome to the CoffeeShop E-Commerce Website, a sample React application showcas
 
 - **Vite**: A fast development server, bundler, and optimized build tool.
 
-- **Mapbox**: A mapping platform for embedding maps into applications.
+- **Mock Data**: All data is stored locally using LocalStorage and mock data files.
 
 ## Getting Started
 

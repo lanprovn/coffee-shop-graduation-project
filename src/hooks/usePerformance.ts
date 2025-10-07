@@ -290,58 +290,6 @@ export function useOptimizedForm<T extends Record<string, any>>(
 }
 
 /**
- * Hook để optimize API calls với caching
- */
-export function useOptimizedAPI<T>(
-  apiCall: () => Promise<T>,
-  cacheKey: string,
-  cacheTime: number = 5 * 60 * 1000 // 5 minutes
-) {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const cacheRef = useRef<Map<string, { data: T; timestamp: number }>>(new Map());
-  
-  const fetchData = useCallback(async () => {
-    // Check cache first
-    const cached = cacheRef.current.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < cacheTime) {
-      setData(cached.data);
-      return;
-    }
-    
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const result = await apiCall();
-      setData(result);
-      
-      // Cache the result
-      cacheRef.current.set(cacheKey, {
-        data: result,
-        timestamp: Date.now()
-      });
-    } catch (err) {
-      setError(err as Error);
-    } finally {
-      setLoading(false);
-    }
-  }, [apiCall, cacheKey, cacheTime]);
-  
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-  
-  return {
-    data,
-    loading,
-    error,
-    refetch: fetchData
-  };
-}
-
-/**
  * Hook để optimize component mounting/unmounting
  */
 export function useOptimizedMount() {
