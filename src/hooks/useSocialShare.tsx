@@ -180,13 +180,7 @@ export function ShareButton({
     return (
       <button
         onClick={handleClick}
-        className={`
-          ${sizeClasses[size]}
-          bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800
-          rounded-lg flex items-center justify-center
-          transition-colors duration-200
-          ${className}
-        `}
+        className={`${sizeClasses[size]} bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 rounded-lg flex items-center justify-center transition-colors duration-200 ${className}`}
         title="Chia sẻ"
       >
         <ShareIcon className={iconSizes[size]} />
@@ -198,12 +192,7 @@ export function ShareButton({
     return (
       <button
         onClick={handleClick}
-        className={`
-          flex items-center gap-2 px-3 py-2
-          bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900
-          rounded-lg transition-colors duration-200
-          ${className}
-        `}
+        className={`flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 rounded-lg transition-colors duration-200 ${className}`}
       >
         <ShareIcon className="w-4 h-4" />
         <span className="text-sm font-medium">Chia sẻ</span>
@@ -214,12 +203,7 @@ export function ShareButton({
   return (
     <button
       onClick={handleClick}
-      className={`
-        flex items-center gap-2 px-4 py-2
-        bg-primary text-white hover:bg-primary/90
-        rounded-lg transition-colors duration-200
-        ${className}
-      `}
+      className={`flex items-center gap-2 px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded-lg transition-colors duration-200 ${className}`}
     >
       <ShareIcon className="w-4 h-4" />
       <span className="text-sm font-medium">Chia sẻ</span>

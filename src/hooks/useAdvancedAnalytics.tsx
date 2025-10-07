@@ -6,8 +6,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { 
   ChartBarIcon, 
-  TrendingUpIcon, 
-  TrendingDownIcon,
+  ArrowTrendingUpIcon, 
+  ArrowTrendingDownIcon,
   UsersIcon,
   ShoppingBagIcon,
   CurrencyDollarIcon,
@@ -226,7 +226,7 @@ export function AdvancedAnalyticsDashboard() {
             <EyeIcon className="w-8 h-8 text-blue-500" />
           </div>
           <div className="mt-2 flex items-center text-sm text-green-600">
-            <TrendingUpIcon className="w-4 h-4 mr-1" />
+            <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
             +12.5% so với tháng trước
           </div>
         </div>
@@ -242,7 +242,7 @@ export function AdvancedAnalyticsDashboard() {
             <UsersIcon className="w-8 h-8 text-green-500" />
           </div>
           <div className="mt-2 flex items-center text-sm text-green-600">
-            <TrendingUpIcon className="w-4 h-4 mr-1" />
+            <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
             +8.2% so với tháng trước
           </div>
         </div>
@@ -258,7 +258,7 @@ export function AdvancedAnalyticsDashboard() {
             <CurrencyDollarIcon className="w-8 h-8 text-yellow-500" />
           </div>
           <div className="mt-2 flex items-center text-sm text-green-600">
-            <TrendingUpIcon className="w-4 h-4 mr-1" />
+            <ArrowTrendingUpIcon className="w-4 h-4 mr-1" />
             +15.3% so với tháng trước
           </div>
         </div>
@@ -274,7 +274,7 @@ export function AdvancedAnalyticsDashboard() {
             <ShoppingBagIcon className="w-8 h-8 text-purple-500" />
           </div>
           <div className="mt-2 flex items-center text-sm text-red-600">
-            <TrendingDownIcon className="w-4 h-4 mr-1" />
+            <ArrowTrendingDownIcon className="w-4 h-4 mr-1" />
             -2.1% so với tháng trước
           </div>
         </div>

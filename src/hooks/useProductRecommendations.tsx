@@ -8,7 +8,7 @@ import { CoffeeProduct, ProductCategory } from '@/types';
 import { useProduct } from '@/hooks/useProduct';
 import { useRecentViewed } from './useRecentViewed';
 import { useWishlist } from './useWishlist';
-import { StarIcon, SparklesIcon, TrendingUpIcon } from '@heroicons/react/24/outline';
+import { StarIcon, SparklesIcon, ArrowTrendingUpIcon } from '@heroicons/react/24/outline';
 
 const RECOMMENDATION_KEY = 'coffee-shop-recommendations';
 
@@ -201,7 +201,7 @@ export function RecommendationCard({ recommendation, className = '' }: Recommend
   const getIcon = () => {
     switch (recommendation.type) {
       case 'trending':
-        return <TrendingUpIcon className="w-4 h-4 text-orange-500" />;
+        return <ArrowTrendingUpIcon className="w-4 h-4 text-orange-500" />;
       case 'similar':
         return <StarIcon className="w-4 h-4 text-blue-500" />;
       case 'personalized':
