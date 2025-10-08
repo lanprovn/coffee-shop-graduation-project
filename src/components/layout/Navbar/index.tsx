@@ -18,6 +18,7 @@ import { useProduct } from '@/hooks/useProduct';
 import { ProductCategory } from '@/types';
 import { useDebounce, useOptimizedCallback } from '@/hooks/usePerformance';
 import BackButton from '@/components/shared/BackButton';
+import ThemeToggle from '@/components/shared/ThemeToggle';
 import { useIsMobile } from '@/hooks/useMobileBack';
 
 export default function Navbar() {
@@ -226,6 +227,9 @@ export default function Navbar() {
                 >
                   {user?.name || 'Đăng nhập'}
                 </Link>
+
+                {/* Theme Toggle */}
+                <ThemeToggle variant="button" className="mr-2" />
 
                 {/* Notifications */}
                 {user && <NotificationCenter />}

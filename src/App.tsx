@@ -13,9 +13,13 @@ import { ShareModal } from './hooks/useSocialShare';
 import { ErrorBoundary } from './components/shared/LoadingStates';
 import { AccessibilitySettings, LiveRegion } from './components/shared/Accessibility';
 import { useAnnouncer } from './components/shared/Accessibility';
+import { useTheme } from './hooks/useTheme';
 
 function AppContent() {
   const { announce, announcement } = useAnnouncer();
+  
+  // Initialize theme system
+  useTheme();
 
   return (
     <>

@@ -8,6 +8,7 @@ import HeroSection from '@/components/shared/HeroSection';
 import SEO from '@/components/shared/SEO';
 import { bannerSlides } from '@/data/bannerSlides';
 import Title1 from '@/components/shared/typo/Title1';
+import { AnimatedPage, StaggerList, StaggerItem, ScrollAnimated } from '@/components/shared/Animations';
 import Title2 from '@/components/shared/typo/Title2';
 import ButtonFilled from '@/components/shared/button/ButtonFilled';
 import { useNavigate } from 'react-router-dom';
@@ -69,7 +70,7 @@ function HomePage() {
   }, [navigate]);
 
   return (
-    <>
+    <AnimatedPage>
       <SEO
         title="Highland Coffee - Premium Coffee & Beverages | Trang Chủ"
         description="Khám phá thế giới cà phê cao cấp tại Highland Coffee. Từ cà phê truyền thống đến các thức uống hiện đại, chúng tôi mang đến trải nghiệm tuyệt vời nhất với chất lượng cao và dịch vụ chuyên nghiệp."
@@ -227,7 +228,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-    </>
+    </AnimatedPage>
   );
 }
 
