@@ -1,2 +1,0 @@
-com\coffeeshop\gateway\ApiGatewayApplication.class
-com\coffeeshop\gateway\filter\RateLimitingFilter.class
