@@ -1,11 +1,11 @@
 {
-    "name": "Coffee Shop - Premium Coffee & Beverages",
-    "short_name": "Coffee Shop",
-    "description": "Khám phá thế giới cà phê cao cấp tại Coffee Shop. Từ cà phê truyền thống đến các thức uống hiện đại.",
+    "name": "Highland Coffee - Premium Coffee & Beverages",
+    "short_name": "Highland Coffee",
+    "description": "Khám phá thế giới cà phê cao cấp tại Highland Coffee. Từ cà phê truyền thống đến các thức uống hiện đại.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#006241",
+    "background_color": "#F5F5DC",
+    "theme_color": "#C41E3A",
     "orientation": "portrait-primary",
     "icons": [
         {
@@ -32,9 +32,9 @@
     "prefer_related_applications": false,
     "shortcuts": [
         {
-            "name": "Xem Menu",
+            "name": "Xem Menu Highland",
             "short_name": "Menu",
-            "description": "Khám phá menu cà phê và thức uống",
+            "description": "Khám phá menu cà phê và thức uống Highland",
             "url": "/products",
             "icons": [
                 {
@@ -48,6 +48,18 @@
             "short_name": "Cart",
             "description": "Xem giỏ hàng của bạn",
             "url": "/cart",
+            "icons": [
+                {
+                    "src": "/images/app-logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Cửa Hàng Gần Nhất",
+            "short_name": "Stores",
+            "description": "Tìm cửa hàng Highland Coffee gần nhất",
+            "url": "/stores",
             "icons": [
                 {
                     "src": "/images/app-logo.png",

@@ -56,14 +56,14 @@ export default function Navbar() {
   const filteredCategories = useMemo(() => {
     return Array.from(new Set(coffees.map(p => p.category)))
       .filter(cat => {
-        if (!debouncedMenuQuery || typeof debouncedMenuQuery !== 'string' || !debouncedMenuQuery.trim()) {return true;}
+        if (!debouncedMenuQuery || typeof debouncedMenuQuery !== 'string' || !debouncedMenuQuery.trim()) { return true; }
         const viName = ((): string => {
           switch (cat as ProductCategory) {
-          case ProductCategory.Coffee: return 'Cà phê';
-          case ProductCategory.Tea: return 'Trà';
-          case ProductCategory.Freeze: return 'Đá xay / Freeze';
-          case ProductCategory.Cake: return 'Bánh ngọt';
-          default: return String(cat);
+            case ProductCategory.Coffee: return 'Cà phê';
+            case ProductCategory.Tea: return 'Trà';
+            case ProductCategory.Freeze: return 'Đá xay / Freeze';
+            case ProductCategory.Cake: return 'Bánh ngọt';
+            default: return String(cat);
           }
         })();
         return viName.toLowerCase().includes(debouncedMenuQuery.toLowerCase());
@@ -72,7 +72,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg border-b border-primary/20">
         <div className="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="flex items-center justify-between h-12 sm:h-14 lg:h-16">
 
@@ -80,11 +80,11 @@ export default function Navbar() {
             <div className="flex items-center lg:hidden gap-2">
               {/* Back Button - chỉ hiển thị khi không ở trang chủ */}
               {pathname !== '/' && <BackButton />}
-              
+
               {/* Mobile menu button */}
               <button
                 onClick={toggleMobileMenu}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-primary-600 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
                 aria-expanded="false"
               >
                 <span className="sr-only">Open main menu</span>
@@ -103,7 +103,7 @@ export default function Navbar() {
                 className="flex items-center space-x-1 sm:space-x-2 focus:outline-none text-primary hover:opacity-80"
               >
                 <img src="/images/app-logo.svg" className="h-6 sm:h-7 lg:h-8" alt="Logo ứng dụng" />
-                <span className="font-semibold whitespace-nowrap text-sm sm:text-base lg:text-lg hidden xs:block">
+                <span className="font-bold whitespace-nowrap text-sm sm:text-base lg:text-lg hidden xs:block highland-text-gradient">
                   {APP_NAME}
                 </span>
               </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 >
                   <button
                     onClick={() => setShowMenu(!showMenu)}
-                    className="group relative flex items-center gap-2 focus:outline-none px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary"
+                    className="group relative flex items-center gap-2 focus:outline-none px-3 py-2 rounded-md text-sm font-medium text-neutral-700 hover:text-primary transition-colors duration-200"
                   >
                     <span className="text-base">☕</span>
                     <span className="relative">
@@ -129,7 +129,7 @@ export default function Navbar() {
                     </span>
                     <svg
                       className={`w-4 h-4 mt-[2px] transition-transform duration-200 ${showMenu ? 'rotate-180' : ''
-                      }`}
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -145,7 +145,7 @@ export default function Navbar() {
 
                   {/* Dropdown content */}
                   {showMenu && (
-                    <div className="absolute left-0 top-full bg-white border border-gray-100 rounded-xl shadow-xl mt-2 w-64 z-30 transition-opacity duration-300 ease-in-out opacity-100">
+                    <div className="absolute left-0 top-full bg-white border border-primary/20 rounded-xl shadow-xl mt-2 w-64 z-30 transition-opacity duration-300 ease-in-out opacity-100">
                       <div className="p-3 border-b">
                         <div className="relative">
                           <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -157,22 +157,22 @@ export default function Navbar() {
                           />
                         </div>
                       </div>
-                      <ul className="py-2 text-gray-700 text-sm font-medium max-h-80 overflow-auto">
+                      <ul className="py-2 text-neutral-700 text-sm font-medium max-h-80 overflow-auto">
                         {filteredCategories.map((cat) => {
                           const first = coffees.find(p => p.category === cat);
                           const img = first?.image || '/images/app-logo.png';
                           const viName = ((): string => {
                             switch (cat as ProductCategory) {
-                            case ProductCategory.Coffee: return 'Cà phê';
-                            case ProductCategory.Tea: return 'Trà';
-                            case ProductCategory.Freeze: return 'Đá xay / Freeze';
-                            case ProductCategory.Cake: return 'Bánh ngọt';
-                            default: return String(cat);
+                              case ProductCategory.Coffee: return 'Cà phê';
+                              case ProductCategory.Tea: return 'Trà';
+                              case ProductCategory.Freeze: return 'Đá xay / Freeze';
+                              case ProductCategory.Cake: return 'Bánh ngọt';
+                              default: return String(cat);
                             }
                           })();
                           const to = `/products?category=${encodeURIComponent(String(cat))}`;
                           return (
-                            <li key={String(cat)} className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 transition">
+                            <li key={String(cat)} className="px-4 py-2 hover:bg-primary/10 flex items-center gap-2 transition-colors duration-200">
                               <img src={img} className="w-5 h-5 rounded" />
                               <Link to={to}>{viName}</Link>
                             </li>
@@ -185,31 +185,31 @@ export default function Navbar() {
 
                 <Link
                   to="/about"
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive('/about') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/about') ? 'text-primary bg-primary/10' : 'text-neutral-700 hover:text-primary hover:bg-primary/5'}`}
                 >
                   Về chúng tôi
                 </Link>
                 <Link
                   to="/stores"
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive('/stores') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/stores') ? 'text-primary bg-primary/10' : 'text-neutral-700 hover:text-primary hover:bg-primary/5'}`}
                 >
                   Cửa hàng
                 </Link>
                 <Link
                   to="/news"
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive('/news') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/news') ? 'text-primary bg-primary/10' : 'text-neutral-700 hover:text-primary hover:bg-primary/5'}`}
                 >
                   Tin tức
                 </Link>
                 <Link
                   to="/membership"
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive('/membership') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/membership') ? 'text-primary bg-primary/10' : 'text-neutral-700 hover:text-primary hover:bg-primary/5'}`}
                 >
                   Thành viên
                 </Link>
                 <Link
                   to="/contact"
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive('/contact') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/contact') ? 'text-primary bg-primary/10' : 'text-neutral-700 hover:text-primary hover:bg-primary/5'}`}
                 >
                   Liên hệ
                 </Link>
@@ -222,7 +222,7 @@ export default function Navbar() {
                 {/* User Profile */}
                 <Link
                   to={user?.name ? '/profile' : '/login'}
-                  className="text-gray-500 hover:text-primary font-semibold hover:underline mr-4"
+                  className="text-neutral-600 hover:text-primary font-semibold hover:underline mr-4 transition-colors duration-200"
                 >
                   {user?.name || 'Đăng nhập'}
                 </Link>
@@ -233,11 +233,11 @@ export default function Navbar() {
                 {/* Cart */}
                 <button
                   onClick={handleCartClick}
-                  className="relative hover:bg-primary-50 text-black hover:text-primary-600 rounded-full p-2 ease-in ml-2"
+                  className="relative hover:bg-primary/10 text-neutral-700 hover:text-primary rounded-full p-2 transition-colors duration-200 ml-2"
                 >
                   <ShoppingCartIcon className="w-6 h-6" />
                   {!!itemCount && (
-                    <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-primary-500 rounded-full top-0 end-0">
+                    <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-primary rounded-full top-0 end-0">
                       {itemCount}
                     </div>
                   )}
@@ -251,11 +251,11 @@ export default function Navbar() {
               {/* Cart for mobile */}
               <button
                 onClick={handleCartClick}
-                className="relative p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-md"
+                className="relative p-2 text-primary hover:text-primary-600 hover:bg-primary/10 rounded-md transition-colors duration-200"
               >
                 <ShoppingCartIcon className="w-6 h-6" />
                 {!!itemCount && (
-                  <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-primary-500 rounded-full top-0 end-0">
+                  <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-primary rounded-full top-0 end-0">
                     {itemCount}
                   </div>
                 )}
@@ -270,56 +270,56 @@ export default function Navbar() {
         {/* Mobile menu */}
         {showMobileMenu && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-primary/20">
               {/* Mobile menu items */}
               <Link
                 to="/products"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                 onClick={() => setShowMobileMenu(false)}
               >
                 ☕ Thực đơn
               </Link>
               <Link
                 to="/about"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                 onClick={() => setShowMobileMenu(false)}
               >
                 Về chúng tôi
               </Link>
               <Link
                 to="/stores"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                 onClick={() => setShowMobileMenu(false)}
               >
                 Cửa hàng
               </Link>
               <Link
                 to="/news"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                 onClick={() => setShowMobileMenu(false)}
               >
                 Tin tức
               </Link>
               <Link
                 to="/membership"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                 onClick={() => setShowMobileMenu(false)}
               >
                 Thành viên
               </Link>
               <Link
                 to="/contact"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                 onClick={() => setShowMobileMenu(false)}
               >
                 Liên hệ
               </Link>
 
               {/* Mobile user section */}
-              <div className="border-t border-gray-200 pt-4 mt-4">
+              <div className="border-t border-primary/20 pt-4 mt-4">
                 <Link
                   to={user?.name ? '/profile' : '/login'}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   {user?.name || 'Đăng nhập'}

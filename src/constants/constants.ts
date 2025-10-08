@@ -1,6 +1,6 @@
 import { CoffeeSize, DeliOption, LatLng, PaymentMethod } from '@/types';
 
-export const APP_NAME = 'Coffee Shop';
+export const APP_NAME = 'Highland Coffee';
 
 export const GOOGLE_OAUTH_CLIENT_ID = 'mock-google-client-id';
 

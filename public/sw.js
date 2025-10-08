@@ -1,5 +1,5 @@
-// Service Worker for Coffee Shop Web App
-const CACHE_NAME = 'coffee-shop-v1';
+// Service Worker for Highland Coffee Web App
+const CACHE_NAME = 'highland-coffee-v1';
 const STATIC_CACHE_URLS = [
     '/',
     '/index.html',
@@ -140,7 +140,7 @@ self.addEventListener('push', (event) => {
     console.log('Push notification received');
 
     const options = {
-        body: event.data ? event.data.text() : 'New notification from Coffee Shop',
+        body: event.data ? event.data.text() : 'Thông báo mới từ Highland Coffee',
         icon: '/images/app-logo.png',
         badge: '/images/app-logo.png',
         vibrate: [100, 50, 100],
@@ -163,7 +163,7 @@ self.addEventListener('push', (event) => {
     };
 
     event.waitUntil(
-        self.registration.showNotification('Coffee Shop', options)
+        self.registration.showNotification('Highland Coffee', options)
     );
 });
 

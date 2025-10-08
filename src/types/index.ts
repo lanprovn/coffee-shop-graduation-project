@@ -39,29 +39,50 @@ export interface Topping {
 }
 
 export interface ProductSizeOption {
-  size: ProductSize;
+  name: string;
   price: number;
+  volume: string;
+}
+
+export interface ProductCustomization {
+  name: string;
+  options: string[];
+}
+
+export interface ProductNutrition {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
 }
 
 export interface CoffeeProduct {
   id: string;
-  displayName: string;
-  category: ProductCategory;
-  basePrice: number;
+  name: string;
   description: string;
+  price: number;
+  originalPrice?: number;
   image: string;
-  sizes: ProductSizeOption[];
-  toppings: Topping[];
+  category: ProductCategory;
+  rating: number;
+  reviewCount: number;
+  isNew: boolean;
+  isBestSeller: boolean;
   isAvailable: boolean;
+  sizes: ProductSizeOption[];
+  customizations: ProductCustomization[];
+  nutrition: ProductNutrition;
+  allergens: string[];
+  preparationTime: number; // in minutes
+  tags: string[];
 }
 
 export interface CartItem {
+  id: string;
   product: CoffeeProduct;
   quantity: number;
-  selectedSize: ProductSize;
-  selectedToppings: Topping[];
-  unitPrice: number;
-  totalPrice: number;
+  size: string;
+  customizations?: Record<string, string>;
 }
 
 export enum DeliOption {
@@ -139,13 +160,27 @@ export enum OrderStatus {
 
 export interface DeliveryOrder {
   id: string;
-  customer: Customer;
-  items: OrderItem[];
-  deliOption: DeliOption;
-  paymentMethod: PaymentMethod;
-  totalPayment: number;
-  date: string;
-  image: string;
+  userId: string;
+  items: {
+    product: CoffeeProduct;
+    quantity: number;
+    size: string;
+    customizations?: Record<string, string>;
+  }[];
+  total: number;
+  deliveryFee: number;
+  discount: number;
+  finalTotal: number;
+  status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'delivered' | 'cancelled';
+  paymentMethod: string;
+  deliveryAddress: UserAddress;
+  estimatedDeliveryTime: string;
+  actualDeliveryTime?: string;
+  createdAt: string;
+  updatedAt: string;
+  notes?: string;
+  rating?: number;
+  review?: string;
 }
 
 export interface ProductReview {
@@ -156,8 +191,10 @@ export interface ProductReview {
   userAvatar?: string;
   rating: number; // 1-5 stars
   comment: string;
+  images?: string[];
   createdAt: string;
-  isVerified: boolean; // Đã mua sản phẩm
+  helpful: number;
+  verified: boolean; // Đã mua sản phẩm
 }
 
 export interface ProductRating {
@@ -175,35 +212,52 @@ export interface ProductRating {
 
 export interface Notification {
   id: string;
-  userId: string;
+  type: 'order' | 'promotion' | 'membership' | 'general';
   title: string;
   message: string;
-  type: 'success' | 'info' | 'warning' | 'error';
-  isRead: boolean;
+  data?: Record<string, any>;
+  read: boolean;
   createdAt: string;
-  actionUrl?: string;
   priority?: 'low' | 'medium' | 'high';
 }
 
 export interface Membership {
-  id: string;
-  name: string;
-  level: 'Silver' | 'Gold' | 'Diamond';
+  level: string;
+  minPoints: number;
+  maxPoints: number;
   benefits: string[];
-  discountPercentage: number;
-  pointsMultiplier: number;
-  minSpent: number;
   color: string;
   icon: string;
 }
 
+export interface UserAddress {
+  id: string;
+  name: string;
+  address: string;
+  phone: string;
+  isDefault: boolean;
+  coordinates: LatLng;
+}
+
+export interface UserPreferences {
+  favoriteCategories: string[];
+  favoriteProducts: string[];
+  dietaryRestrictions: string[];
+  notifications: {
+    email: boolean;
+    sms: boolean;
+    push: boolean;
+  };
+}
+
 export interface UserProfile extends AuthUser {
-  membership?: Membership;
+  phone?: string;
   points: number;
   totalSpent: number;
   joinDate: string;
-  phone?: string;
-  address?: UserAddress;
+  membership: Membership;
+  preferences: UserPreferences;
+  addresses: UserAddress[];
 }
 
 export interface Store {
@@ -213,7 +267,7 @@ export interface Store {
   phone: string;
   email: string;
   coordinates: LatLng;
-  openingHours: {
+  hours: {
     monday: string;
     tuesday: string;
     wednesday: string;
@@ -223,7 +277,13 @@ export interface Store {
     sunday: string;
   };
   services: string[];
-  image: string;
+  rating: number;
+  reviewCount: number;
+  images: string[];
+  isOpen: boolean;
+  deliveryRadius: number;
+  deliveryFee: number;
+  minOrderAmount: number;
 }
 
 export interface NewsArticle {
