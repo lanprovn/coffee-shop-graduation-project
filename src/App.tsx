@@ -15,6 +15,10 @@ import { AccessibilitySettings, LiveRegion } from './components/shared/Accessibi
 import { useAnnouncer } from './components/shared/Accessibility';
 import { useTheme } from './hooks/useTheme';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { useOfflineMode } from './hooks/useOfflineStore';
+import { useAnalytics } from './hooks/useAdvancedAnalytics';
+import { useABTesting } from './hooks/useABTesting';
+import OfflineIndicator from './components/shared/OfflineIndicator';
 
 function AppContent() {
   const { announce, announcement } = useAnnouncer();
@@ -29,6 +33,36 @@ function AppContent() {
     helpKey: '?',
   });
 
+  // Initialize offline mode
+  const { isOnline, syncData } = useOfflineMode();
+  
+  // Initialize analytics
+  const { trackPageView, setUserId } = useAnalytics();
+  
+  // Initialize A/B testing
+  const { setUserId: setABUserId } = useABTesting();
+
+  // Track page view on mount
+  React.useEffect(() => {
+    trackPageView(window.location.pathname);
+  }, [trackPageView]);
+
+  // Set user ID for analytics and A/B testing
+  React.useEffect(() => {
+    const userId = localStorage.getItem('highland-user-id');
+    if (userId) {
+      setUserId(userId);
+      setABUserId(userId);
+    }
+  }, [setUserId, setABUserId]);
+
+  // Sync data when online
+  React.useEffect(() => {
+    if (isOnline) {
+      syncData();
+    }
+  }, [isOnline, syncData]);
+
   return (
     <>
       <ScrollToTop />
@@ -38,6 +72,7 @@ function AppContent() {
       <AccessibilitySettings />
       <LiveRegion announcement={announcement} />
       <HelpModal />
+      <OfflineIndicator />
     </>
   );
 }
