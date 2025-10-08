@@ -1,5 +1,9 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { useOfflineStore } from './useOfflineStore';
+import { useShoppingCart } from './useShoppingCart';
+import { useWishlist } from './useWishlist';
+import { useUserAddress } from './useUserAddress';
+import { CoffeeProduct, CartItem, UserAddress } from '@/types';
 
 interface OptimisticUpdateConfig<T> {
   optimisticData: T;
