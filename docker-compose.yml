@@ -1,0 +1,274 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: highland-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: highland_coffee
+      MYSQL_USER: highland_user
+      MYSQL_PASSWORD: highland_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - highland-network
+    restart: unless-stopped
+
+  # RabbitMQ Message Queue
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: highland-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - highland-network
+    restart: unless-stopped
+
+  # Eureka Server
+  eureka-server:
+    build:
+      context: ./backend/eureka-server
+      dockerfile: Dockerfile
+    container_name: highland-eureka
+    ports:
+      - "8761:8761"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./backend/api-gateway
+      dockerfile: Dockerfile
+    container_name: highland-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+
+  # User Service
+  user-service:
+    build:
+      context: ./backend/user-service
+      dockerfile: Dockerfile
+    container_name: highland-user-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+
+  # Product Service
+  product-service:
+    build:
+      context: ./backend/product-service
+      dockerfile: Dockerfile
+    container_name: highland-product-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+
+  # Order Service
+  order-service:
+    build:
+      context: ./backend/order-service
+      dockerfile: Dockerfile
+    container_name: highland-order-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin123
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+      - rabbitmq
+
+  # Payment Service
+  payment-service:
+    build:
+      context: ./backend/payment-service
+      dockerfile: Dockerfile
+    container_name: highland-payment-service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+
+  # Notification Service
+  notification-service:
+    build:
+      context: ./backend/notification-service
+      dockerfile: Dockerfile
+    container_name: highland-notification-service
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin123
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+      - rabbitmq
+
+  # Loyalty Service
+  loyalty-service:
+    build:
+      context: ./backend/loyalty-service
+      dockerfile: Dockerfile
+    container_name: highland-loyalty-service
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+
+  # Analytics Service
+  analytics-service:
+    build:
+      context: ./backend/analytics-service
+      dockerfile: Dockerfile
+    container_name: highland-analytics-service
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+
+  # Store Service
+  store-service:
+    build:
+      context: ./backend/store-service
+      dockerfile: Dockerfile
+    container_name: highland-store-service
+    ports:
+      - "8088:8088"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/highland_coffee
+      SPRING_DATASOURCE_USERNAME: highland_user
+      SPRING_DATASOURCE_PASSWORD: highland_password
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+      - mysql
+
+  # Frontend (Optional - can run separately)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: highland-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080
+      VITE_APP_NAME: Highland Coffee
+      VITE_APP_VERSION: 1.0.0
+    networks:
+      - highland-network
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+
+volumes:
+  mysql_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+
+networks:
+  highland-network:
+    driver: bridge
