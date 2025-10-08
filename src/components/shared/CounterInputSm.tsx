@@ -25,7 +25,7 @@ const CounterInputSm = ({ value, onChange }: CounterInputSmProps) => {
       <CountButton onClick={decreasedCount}>
         {value > 1 ? (
           <MinusIcon className="w-4 h-4 text-primary" />
-          ) : (
+        ) : (
           <TrashIcon className="w-4 h-4 text-primary" />
         )}
       </CountButton>

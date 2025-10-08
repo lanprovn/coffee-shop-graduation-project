@@ -56,14 +56,14 @@ export default function Navbar() {
   const filteredCategories = useMemo(() => {
     return Array.from(new Set(coffees.map(p => p.category)))
       .filter(cat => {
-        if (!debouncedMenuQuery || typeof debouncedMenuQuery !== 'string' || !debouncedMenuQuery.trim()) return true;
+        if (!debouncedMenuQuery || typeof debouncedMenuQuery !== 'string' || !debouncedMenuQuery.trim()) {return true;}
         const viName = ((): string => {
           switch (cat as ProductCategory) {
-            case ProductCategory.Coffee: return 'Cà phê';
-            case ProductCategory.Tea: return 'Trà';
-            case ProductCategory.Freeze: return 'Đá xay / Freeze';
-            case ProductCategory.Cake: return 'Bánh ngọt';
-            default: return String(cat);
+          case ProductCategory.Coffee: return 'Cà phê';
+          case ProductCategory.Tea: return 'Trà';
+          case ProductCategory.Freeze: return 'Đá xay / Freeze';
+          case ProductCategory.Cake: return 'Bánh ngọt';
+          default: return String(cat);
           }
         })();
         return viName.toLowerCase().includes(debouncedMenuQuery.toLowerCase());
@@ -129,7 +129,7 @@ export default function Navbar() {
                     </span>
                     <svg
                       className={`w-4 h-4 mt-[2px] transition-transform duration-200 ${showMenu ? 'rotate-180' : ''
-                        }`}
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -159,25 +159,25 @@ export default function Navbar() {
                       </div>
                       <ul className="py-2 text-gray-700 text-sm font-medium max-h-80 overflow-auto">
                         {filteredCategories.map((cat) => {
-                            const first = coffees.find(p => p.category === cat);
-                            const img = first?.image || '/images/app-logo.png';
-                            const viName = ((): string => {
-                              switch (cat as ProductCategory) {
-                                case ProductCategory.Coffee: return 'Cà phê';
-                                case ProductCategory.Tea: return 'Trà';
-                                case ProductCategory.Freeze: return 'Đá xay / Freeze';
-                                case ProductCategory.Cake: return 'Bánh ngọt';
-                                default: return String(cat);
-                              }
-                            })();
-                            const to = `/products?category=${encodeURIComponent(String(cat))}`;
-                            return (
-                              <li key={String(cat)} className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 transition">
-                                <img src={img} className="w-5 h-5 rounded" />
-                                <Link to={to}>{viName}</Link>
-                              </li>
-                            );
-                          })}
+                          const first = coffees.find(p => p.category === cat);
+                          const img = first?.image || '/images/app-logo.png';
+                          const viName = ((): string => {
+                            switch (cat as ProductCategory) {
+                            case ProductCategory.Coffee: return 'Cà phê';
+                            case ProductCategory.Tea: return 'Trà';
+                            case ProductCategory.Freeze: return 'Đá xay / Freeze';
+                            case ProductCategory.Cake: return 'Bánh ngọt';
+                            default: return String(cat);
+                            }
+                          })();
+                          const to = `/products?category=${encodeURIComponent(String(cat))}`;
+                          return (
+                            <li key={String(cat)} className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 transition">
+                              <img src={img} className="w-5 h-5 rounded" />
+                              <Link to={to}>{viName}</Link>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}

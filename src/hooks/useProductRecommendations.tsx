@@ -96,7 +96,7 @@ export function useProductRecommendations() {
         .slice(0, 3)
         .map(product => ({
           product,
-          reason: `Dựa trên sở thích của bạn`,
+          reason: 'Dựa trên sở thích của bạn',
           score: 90,
           type: 'personalized' as const
         }));
@@ -200,35 +200,35 @@ interface RecommendationCardProps {
 export function RecommendationCard({ recommendation, className = '' }: RecommendationCardProps) {
   const getIcon = () => {
     switch (recommendation.type) {
-      case 'trending':
-        return <ArrowTrendingUpIcon className="w-4 h-4 text-orange-500" />;
-      case 'similar':
-        return <StarIcon className="w-4 h-4 text-blue-500" />;
-      case 'personalized':
-        return <SparklesIcon className="w-4 h-4 text-purple-500" />;
-      case 'category':
-        return <StarIcon className="w-4 h-4 text-green-500" />;
-      case 'price':
-        return <StarIcon className="w-4 h-4 text-yellow-500" />;
-      default:
-        return <StarIcon className="w-4 h-4 text-gray-500" />;
+    case 'trending':
+      return <ArrowTrendingUpIcon className="w-4 h-4 text-orange-500" />;
+    case 'similar':
+      return <StarIcon className="w-4 h-4 text-blue-500" />;
+    case 'personalized':
+      return <SparklesIcon className="w-4 h-4 text-purple-500" />;
+    case 'category':
+      return <StarIcon className="w-4 h-4 text-green-500" />;
+    case 'price':
+      return <StarIcon className="w-4 h-4 text-yellow-500" />;
+    default:
+      return <StarIcon className="w-4 h-4 text-gray-500" />;
     }
   };
 
   const getBadgeColor = () => {
     switch (recommendation.type) {
-      case 'trending':
-        return 'bg-orange-100 text-orange-800';
-      case 'similar':
-        return 'bg-blue-100 text-blue-800';
-      case 'personalized':
-        return 'bg-purple-100 text-purple-800';
-      case 'category':
-        return 'bg-green-100 text-green-800';
-      case 'price':
-        return 'bg-yellow-100 text-yellow-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
+    case 'trending':
+      return 'bg-orange-100 text-orange-800';
+    case 'similar':
+      return 'bg-blue-100 text-blue-800';
+    case 'personalized':
+      return 'bg-purple-100 text-purple-800';
+    case 'category':
+      return 'bg-green-100 text-green-800';
+    case 'price':
+      return 'bg-yellow-100 text-yellow-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -287,7 +287,7 @@ interface RecommendationsSectionProps {
 }
 
 export function RecommendationsSection({ 
-  title = "Gợi ý cho bạn",
+  title = 'Gợi ý cho bạn',
   maxItems = 6,
   showReason = true,
   className = ''

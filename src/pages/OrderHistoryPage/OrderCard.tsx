@@ -8,44 +8,44 @@ interface OrderCardProps {
 
 const getStatusColor = (status: OrderStatus) => {
   switch (status) {
-    case OrderStatus.Pending:
-      return 'text-yellow-600 bg-yellow-50';
-    case OrderStatus.Confirmed:
-      return 'text-blue-600 bg-blue-50';
-    case OrderStatus.Preparing:
-      return 'text-orange-600 bg-orange-50';
-    case OrderStatus.Ready:
-      return 'text-green-600 bg-green-50';
-    case OrderStatus.Delivered:
-      return 'text-green-700 bg-green-100';
-    case OrderStatus.Cancelled:
-      return 'text-red-600 bg-red-50';
-    default:
-      return 'text-gray-600 bg-gray-50';
+  case OrderStatus.Pending:
+    return 'text-yellow-600 bg-yellow-50';
+  case OrderStatus.Confirmed:
+    return 'text-blue-600 bg-blue-50';
+  case OrderStatus.Preparing:
+    return 'text-orange-600 bg-orange-50';
+  case OrderStatus.Ready:
+    return 'text-green-600 bg-green-50';
+  case OrderStatus.Delivered:
+    return 'text-green-700 bg-green-100';
+  case OrderStatus.Cancelled:
+    return 'text-red-600 bg-red-50';
+  default:
+    return 'text-gray-600 bg-gray-50';
   }
 };
 
 const getStatusText = (status: OrderStatus) => {
   switch (status) {
-    case OrderStatus.Pending:
-      return 'Chờ xác nhận';
-    case OrderStatus.Confirmed:
-      return 'Đã xác nhận';
-    case OrderStatus.Preparing:
-      return 'Đang chuẩn bị';
-    case OrderStatus.Ready:
-      return 'Sẵn sàng';
-    case OrderStatus.Delivered:
-      return 'Đã giao';
-    case OrderStatus.Cancelled:
-      return 'Đã hủy';
-    default:
-      return status;
+  case OrderStatus.Pending:
+    return 'Chờ xác nhận';
+  case OrderStatus.Confirmed:
+    return 'Đã xác nhận';
+  case OrderStatus.Preparing:
+    return 'Đang chuẩn bị';
+  case OrderStatus.Ready:
+    return 'Sẵn sàng';
+  case OrderStatus.Delivered:
+    return 'Đã giao';
+  case OrderStatus.Cancelled:
+    return 'Đã hủy';
+  default:
+    return status;
   }
 };
 
 export default function OrderCard({ order }: OrderCardProps) {
-  const orderItemsText = order?.items?.map((i) => `${i.quantity}x ${i.productName} (${i.size})`)?.join(", ");
+  const orderItemsText = order?.items?.map((i) => `${i.quantity}x ${i.productName} (${i.size})`)?.join(', ');
   const orderDate = new Date(order.createdAt).toLocaleDateString('vi-VN');
 
   return (

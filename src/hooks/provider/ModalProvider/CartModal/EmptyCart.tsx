@@ -23,7 +23,7 @@ export default function EmptyCart() {
       <h3 className="text-primary-800/80 text-2xl font-bold mb-4">
         Your Cart is Empty
       </h3>
-      <pre className="text-primary-400 text-sm font-medium mb-4">{`Looks like you haven't added anything\nto your cart yet.`}</pre>
+      <pre className="text-primary-400 text-sm font-medium mb-4">{'Looks like you haven\'t added anything\nto your cart yet.'}</pre>
       <ButtonFilled onClick={handleContinueClick}>
         Continue Shopping
       </ButtonFilled>

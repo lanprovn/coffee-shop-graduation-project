@@ -79,16 +79,16 @@ export function useBulkOrder() {
   const calculateBulkDiscount = useCallback((items: BulkOrderItem[]) => {
     const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
     
-    if (totalQuantity >= 100) return 0.15; // 15% discount for 100+ items
-    if (totalQuantity >= 50) return 0.10;  // 10% discount for 50+ items
-    if (totalQuantity >= 20) return 0.05;  // 5% discount for 20+ items
+    if (totalQuantity >= 100) {return 0.15;} // 15% discount for 100+ items
+    if (totalQuantity >= 50) {return 0.10;}  // 10% discount for 50+ items
+    if (totalQuantity >= 20) {return 0.05;}  // 5% discount for 20+ items
     return 0;
   }, []);
 
   // Add item to bulk order
   const addItemToBulkOrder = useCallback((product: CoffeeProduct, size: ProductSize, quantity: number) => {
     const sizeInfo = product.sizes.find(s => s.size === size);
-    if (!sizeInfo) return;
+    if (!sizeInfo) {return;}
 
     const newItem: BulkOrderItem = {
       productId: product.id,

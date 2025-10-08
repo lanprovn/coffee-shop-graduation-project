@@ -21,7 +21,7 @@ export default function PageLoading({
   overlay = true,
   size = 'lg'
 }: PageLoadingProps) {
-  if (!show) return null;
+  if (!show) {return null;}
 
   if (overlay) {
     return (

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../useLocalStorage';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { AuthUser } from '@/types';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '@/hooks/context/AuthContext';
 
 const keyName = 'coffee-shop-auth-user';
 

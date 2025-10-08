@@ -115,7 +115,7 @@ export default function StoresPage() {
                 <div
                   key={store.id}
                   className={`bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer ${selectedStore?.id === store.id ? 'border-primary bg-primary/5' : 'border-gray-100'
-                    }`}
+                  }`}
                   onClick={() => setSelectedStore(store)}
                 >
                   <div className="flex items-start justify-between mb-4">

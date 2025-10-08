@@ -7,7 +7,7 @@ interface ButtonsProps {
 }
 export default function Buttons({ onBtnClick }: ButtonsProps) {
   // Navigator
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleViewOrderClick = () => {
     navigate('/orders');

@@ -1,0 +1,402 @@
+/* ===== CONSOLIDATED PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Hardware Acceleration & GPU Rendering */
+* {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Smooth Scrolling with Hardware Acceleration */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* ===== HIGH PERFORMANCE ANIMATIONS ===== */
+
+@keyframes smoothFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes smoothSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+@keyframes smoothScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes smoothRotateIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-10deg) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) translateZ(0);
+  }
+}
+
+@keyframes smoothBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateZ(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateZ(0);
+  }
+  70% {
+    transform: scale(0.9) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes smoothShake {
+  0%, 100% {
+    transform: translateX(0) translateZ(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px) translateZ(0);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px) translateZ(0);
+  }
+}
+
+@keyframes smoothPulse {
+  0% {
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    transform: scale(1.05) translateZ(0);
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes smoothWiggle {
+  0%, 7% {
+    transform: rotateZ(0) translateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg) translateZ(0);
+  }
+  20% {
+    transform: rotateZ(10deg) translateZ(0);
+  }
+  25% {
+    transform: rotateZ(-10deg) translateZ(0);
+  }
+  30% {
+    transform: rotateZ(6deg) translateZ(0);
+  }
+  35% {
+    transform: rotateZ(-4deg) translateZ(0);
+  }
+  40%, 100% {
+    transform: rotateZ(0) translateZ(0);
+  }
+}
+
+/* Performance Animation Classes */
+.perf-fade-in { animation: smoothFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.perf-slide-in { animation: smoothSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.perf-scale-in { animation: smoothScaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.perf-rotate-in { animation: smoothRotateIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.perf-bounce-in { animation: smoothBounceIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.perf-shake { animation: smoothShake 0.5s ease-in-out; }
+.perf-pulse { animation: smoothPulse 2s infinite; }
+.perf-wiggle { animation: smoothWiggle 1s ease-in-out; }
+
+/* ===== HIGH REFRESH RATE OPTIMIZATIONS ===== */
+
+/* 90Hz Display Optimizations */
+@media (min-resolution: 90dpi) and (min-width: 360px) {
+  .smooth-transition {
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .btn {
+    transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .card {
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px) translateZ(0);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card:hover {
+    transform: translateY(-6px) translateZ(0);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  }
+  
+  @keyframes smoothFadeIn90 {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) translateZ(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) translateZ(0);
+    }
+  }
+  
+  .fade-in-90 {
+    animation: smoothFadeIn90 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* 120Hz Display Optimizations */
+@media (min-resolution: 120dpi) and (min-width: 360px) {
+  .smooth-transition {
+    transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .btn {
+    transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .card {
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .btn:hover {
+    transform: translateY(-4px) translateZ(0);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card:hover {
+    transform: translateY(-8px) translateZ(0);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  @keyframes smoothFadeIn120 {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) translateZ(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) translateZ(0);
+    }
+  }
+  
+  .fade-in-120 {
+    animation: smoothFadeIn120 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+/* ===== GPU ACCELERATION UTILITIES ===== */
+
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.gpu-card {
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.gpu-button {
+  will-change: transform, background-color;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.gpu-image {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.gpu-text {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* ===== PERFORMANCE OPTIMIZED COMPONENTS ===== */
+
+.perf-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, box-shadow;
+}
+
+.perf-card:hover {
+  transform: translateY(-4px) translateZ(0);
+  -webkit-transform: translateY(-4px) translateZ(0);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.perf-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, background-color;
+}
+
+.perf-button:hover {
+  transform: translateY(-2px) translateZ(0);
+  -webkit-transform: translateY(-2px) translateZ(0);
+}
+
+.perf-button:active {
+  transform: translateY(0) translateZ(0);
+  -webkit-transform: translateY(0) translateZ(0);
+}
+
+.perf-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.perf-image:hover {
+  transform: scale(1.05) translateZ(0);
+  -webkit-transform: scale(1.05) translateZ(0);
+}
+
+/* ===== SCROLL PERFORMANCE ===== */
+
+.perf-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.perf-scroll-container {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+/* ===== MEMORY OPTIMIZATION ===== */
+
+.perf-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+.perf-contain {
+  contain: layout style paint;
+}
+
+.perf-contain-strict {
+  contain: strict;
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .perf-card:hover,
+  .perf-button:hover,
+  .perf-image:hover {
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+  
+  .gpu-accelerated,
+  .gpu-card,
+  .gpu-button,
+  .gpu-image,
+  .gpu-text {
+    will-change: auto;
+  }
+}
+
+/* ===== PRINT OPTIMIZATIONS ===== */
+
+@media print {
+  .perf-card,
+  .perf-button,
+  .perf-image {
+    transform: none !important;
+    -webkit-transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .gpu-accelerated,
+  .gpu-card,
+  .gpu-button,
+  .gpu-image,
+  .gpu-text {
+    will-change: auto;
+  }
+}

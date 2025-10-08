@@ -19,8 +19,8 @@ export default function ProductDetailModal({
   const [selectedSize, setSelectedSize] = useState<ProductSize | undefined>(defaultSize);
 
   const selectedPrice = useMemo(() => {
-    if (!product) return undefined;
-    if (!selectedSize) return undefined;
+    if (!product) {return undefined;}
+    if (!selectedSize) {return undefined;}
     const opt = product.sizes.find(s => s.size === selectedSize);
     return opt?.price ?? product.basePrice;
   }, [product, selectedSize]);

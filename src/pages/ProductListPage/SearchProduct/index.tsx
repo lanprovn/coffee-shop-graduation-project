@@ -1,6 +1,6 @@
 import { useProduct } from '@/hooks/useProduct';
 import { CoffeeProduct } from '@/types';
-import CategoryTitle from '../CategoryTitle';
+import CategoryTitle from '@/pages/ProductListPage/CategoryTitle';
 import { useEffect, useState } from 'react';
 import useDebounce from '@/hooks/useDebounce';
 import NoSearchResult from './NoSearchResult';

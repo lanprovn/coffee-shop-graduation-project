@@ -80,9 +80,9 @@ export default function LoadingSpinner({
           className={classNames(
             'rounded-full animate-pulse',
             size === 'xs' ? 'w-1 h-1' :
-            size === 'sm' ? 'w-2 h-2' :
-            size === 'md' ? 'w-3 h-3' :
-            size === 'lg' ? 'w-4 h-4' : 'w-5 h-5',
+              size === 'sm' ? 'w-2 h-2' :
+                size === 'md' ? 'w-3 h-3' :
+                  size === 'lg' ? 'w-4 h-4' : 'w-5 h-5',
             colorClasses[color]
           )}
           style={{
@@ -113,9 +113,9 @@ export default function LoadingSpinner({
           className={classNames(
             'animate-pulse',
             size === 'xs' ? 'w-1 h-3' :
-            size === 'sm' ? 'w-1 h-4' :
-            size === 'md' ? 'w-1 h-6' :
-            size === 'lg' ? 'w-1 h-8' : 'w-1 h-10',
+              size === 'sm' ? 'w-1 h-4' :
+                size === 'md' ? 'w-1 h-6' :
+                  size === 'lg' ? 'w-1 h-8' : 'w-1 h-10',
             colorClasses[color]
           )}
           style={{
@@ -129,14 +129,14 @@ export default function LoadingSpinner({
 
   const renderLoadingIcon = () => {
     switch (variant) {
-      case 'dots':
-        return renderDots();
-      case 'pulse':
-        return renderPulse();
-      case 'bars':
-        return renderBars();
-      default:
-        return renderSpinner();
+    case 'dots':
+      return renderDots();
+    case 'pulse':
+      return renderPulse();
+    case 'bars':
+      return renderBars();
+    default:
+      return renderSpinner();
     }
   };
 

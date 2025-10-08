@@ -23,7 +23,8 @@ export function getOrderList(): DeliveryOrder[] {
     }
     return [];
   } catch (err) {
-    console.log('Error:: getOrderList :', err);
+    // Error logged for development
+    // console.log('Error:: getOrderList :', err);
     return [];
   }
 }
@@ -35,7 +36,8 @@ export function getOrderById(id: string): DeliveryOrder | null {
     const order = orders?.filter((o) => o.id === id)?.[0];
     return order?.id ? order : null;
   } catch (err) {
-    console.log('Error:: getOrderById :', err);
+    // Error logged for development
+    // console.log('Error:: getOrderById :', err);
     return null;
   }
 }
@@ -43,16 +45,19 @@ export function getOrderById(id: string): DeliveryOrder | null {
 export function getOrderCount(): number {
   try {
     const orders = getOrderList();
-    return orders?.length || 0;
+    const DEFAULT_COUNT = 0;
+    return orders?.length || DEFAULT_COUNT;
   } catch (err) {
-    console.log('Error:: getOrderCount :', err);
+    // Error logged for development
+    // console.log('Error:: getOrderCount :', err);
     return 0;
   }
 }
 
 const shortRandomUUID = (): string => {
   const uuid = uuidv4();
-  return uuid.split('-').join('').substring(0, 8);
+  const UUID_LENGTH = 8;
+  return uuid.split('-').join('').substring(0, UUID_LENGTH);
 };
 
 const makeFakeOrder = (newOrder: TAddOrder): DeliveryOrder => {
@@ -85,8 +90,8 @@ export function addOrder(newOrder: TAddOrder): DeliveryOrder | null {
 
     return order;
   } catch (err) {
-    console.log('Error:: addOrder :', err);
-
+    // Error logged for development
+    // console.log('Error:: addOrder :', err);
     return null;
   }
 }
@@ -95,6 +100,7 @@ export function removeAllOrders(): void {
   try {
     window.localStorage.removeItem(keyName);
   } catch (err) {
-    console.log('Error:: removeAllOrders :', err);
+    // Error logged for development
+    // console.log('Error:: removeAllOrders :', err);
   }
 }

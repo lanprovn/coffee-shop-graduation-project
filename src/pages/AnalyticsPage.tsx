@@ -74,7 +74,7 @@ export default function AnalyticsPage() {
           {icon}
           {trend && (
             <div className={`flex items-center text-sm ${trend === 'up' ? 'text-green-600' : 'text-red-600'
-              }`}>
+            }`}>
               {trend === 'up' ? (
                 <ArrowUpIcon className="w-4 h-4 mr-1" />
               ) : (

@@ -18,7 +18,6 @@ const banners = [
   },
 ];
 
-
 export default function UserAddressCard() {
   const [current, setCurrent] = useState(0);
 
@@ -38,7 +37,7 @@ export default function UserAddressCard() {
           src={banner.image}
           alt={banner.title}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === current ? 'opacity-100' : 'opacity-0'
-            }`}
+          }`}
         />
       ))}
 
@@ -55,7 +54,7 @@ export default function UserAddressCard() {
           <span
             key={i}
             className={`w-3 h-3 rounded-full ${i === current ? 'bg-white' : 'bg-white/50'
-              }`}
+            }`}
           ></span>
         ))}
       </div>

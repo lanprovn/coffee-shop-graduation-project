@@ -36,7 +36,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
       interactive,
     });
 
-    if(interactive){
+    if (interactive){
       map.current.on('move', async () => {
         if (map.current && onCoordChange) {
           onCoordChange({

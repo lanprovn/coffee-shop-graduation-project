@@ -7,20 +7,20 @@ interface OrderInfosProps {
 
 const getStatusText = (status: OrderStatus) => {
   switch (status) {
-    case OrderStatus.Pending:
-      return 'Chờ xác nhận';
-    case OrderStatus.Confirmed:
-      return 'Đã xác nhận';
-    case OrderStatus.Preparing:
-      return 'Đang chuẩn bị';
-    case OrderStatus.Ready:
-      return 'Sẵn sàng';
-    case OrderStatus.Delivered:
-      return 'Đã giao';
-    case OrderStatus.Cancelled:
-      return 'Đã hủy';
-    default:
-      return status;
+  case OrderStatus.Pending:
+    return 'Chờ xác nhận';
+  case OrderStatus.Confirmed:
+    return 'Đã xác nhận';
+  case OrderStatus.Preparing:
+    return 'Đang chuẩn bị';
+  case OrderStatus.Ready:
+    return 'Sẵn sàng';
+  case OrderStatus.Delivered:
+    return 'Đã giao';
+  case OrderStatus.Cancelled:
+    return 'Đã hủy';
+  default:
+    return status;
   }
 };
 

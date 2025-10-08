@@ -113,9 +113,9 @@ export default function CartPage() {
               <button
                 onClick={() => updateDeliOption(DeliOption.DELIVER)}
                 className={`p-4 rounded-xl border-2 transition-all duration-200 ${deliOption === DeliOption.DELIVER
-                    ? 'border-primary bg-primary/5 text-primary'
-                    : 'border-gray-200 hover:border-gray-300'
-                  }`}
+                  ? 'border-primary bg-primary/5 text-primary'
+                  : 'border-gray-200 hover:border-gray-300'
+                }`}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <TruckIcon className="w-6 h-6" />
@@ -129,9 +129,9 @@ export default function CartPage() {
               <button
                 onClick={() => updateDeliOption(DeliOption.PICK_UP)}
                 className={`p-4 rounded-xl border-2 transition-all duration-200 ${deliOption === DeliOption.PICK_UP
-                    ? 'border-primary bg-primary/5 text-primary'
-                    : 'border-gray-200 hover:border-gray-300'
-                  }`}
+                  ? 'border-primary bg-primary/5 text-primary'
+                  : 'border-gray-200 hover:border-gray-300'
+                }`}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <BuildingStorefrontIcon className="w-6 h-6" />

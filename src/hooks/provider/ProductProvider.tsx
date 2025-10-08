@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useMemo } from 'react';
 import { CoffeeProduct, ProductCategory } from '@/types';
 import { products } from '@/data/products';
-import ProductContext from '../context/ProductContext';
+import ProductContext from '@/hooks/context/ProductContext';
 
 interface ProductProviderProps {
   children: ReactNode;

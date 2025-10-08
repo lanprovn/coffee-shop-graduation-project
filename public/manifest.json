@@ -1,12 +1,12 @@
 {
-    "name": "Coffee Shop",
+    "name": "Coffee Shop - Premium Coffee & Beverages",
     "short_name": "Coffee Shop",
-    "description": "Coffee Shop - Đặt cà phê online",
+    "description": "Khám phá thế giới cà phê cao cấp tại Coffee Shop. Từ cà phê truyền thống đến các thức uống hiện đại.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#8B4513",
-    "orientation": "portrait",
+    "theme_color": "#006241",
+    "orientation": "portrait-primary",
     "icons": [
         {
             "src": "/images/app-logo.png",
@@ -29,5 +29,31 @@
     "lang": "vi",
     "dir": "ltr",
     "scope": "/",
-    "prefer_related_applications": false
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name": "Xem Menu",
+            "short_name": "Menu",
+            "description": "Khám phá menu cà phê và thức uống",
+            "url": "/products",
+            "icons": [
+                {
+                    "src": "/images/app-logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Giỏ Hàng",
+            "short_name": "Cart",
+            "description": "Xem giỏ hàng của bạn",
+            "url": "/cart",
+            "icons": [
+                {
+                    "src": "/images/app-logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
 }

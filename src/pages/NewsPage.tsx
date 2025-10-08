@@ -37,10 +37,10 @@ export default function NewsPage() {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'news': return '📰';
-      case 'promotion': return '🎉';
-      case 'event': return '🎪';
-      default: return '📄';
+    case 'news': return '📰';
+    case 'promotion': return '🎉';
+    case 'event': return '🎪';
+    default: return '📄';
     }
   };
 
@@ -97,7 +97,7 @@ export default function NewsPage() {
                   <div className="flex items-center gap-2 mb-2">
                     <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
                       {article.category === 'news' ? 'Tin tức' : 
-                       article.category === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
+                        article.category === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
                     </span>
                     <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">
                       Nổi bật
@@ -124,8 +124,8 @@ export default function NewsPage() {
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-800">
           {selectedCategory === 'all' ? 'Tất cả bài viết' : 
-           selectedCategory === 'news' ? 'Tin tức' :
-           selectedCategory === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
+            selectedCategory === 'news' ? 'Tin tức' :
+              selectedCategory === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
         </h3>
         
         <div className="grid gap-6">
@@ -141,7 +141,7 @@ export default function NewsPage() {
                   <div className="flex items-center gap-2 mb-2">
                     <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
                       {article.category === 'news' ? 'Tin tức' : 
-                       article.category === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
+                        article.category === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
                     </span>
                     {article.isFeatured && (
                       <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">
@@ -184,7 +184,7 @@ export default function NewsPage() {
                 <span className="text-2xl">{getCategoryIcon(selectedArticle.category)}</span>
                 <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">
                   {selectedArticle.category === 'news' ? 'Tin tức' : 
-                   selectedArticle.category === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
+                    selectedArticle.category === 'promotion' ? 'Khuyến mãi' : 'Sự kiện'}
                 </span>
                 {selectedArticle.isFeatured && (
                   <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">

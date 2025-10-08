@@ -1,10 +1,10 @@
 import { CoffeeSize, DeliOption, LatLng, PaymentMethod } from '@/types';
 
-export const APP_NAME = "Coffee Shop";
+export const APP_NAME = 'Coffee Shop';
 
-export const GOOGLE_OAUTH_CLIENT_ID = "mock-google-client-id";
+export const GOOGLE_OAUTH_CLIENT_ID = 'mock-google-client-id';
 
-export const MAPBOX_ACCESS_TOKEN = "mock-mapbox-token";
+export const MAPBOX_ACCESS_TOKEN = 'mock-mapbox-token';
 
 export const defaultCoordinate: LatLng = {
   lng: 96.17045650343823,
@@ -42,17 +42,17 @@ export const deliOptions = [
 export const paymentMethodOptions = [
   {
     value: PaymentMethod.CASH,
-    label: "Cash on Delivery",
+    label: 'Cash on Delivery',
     icon: '/images/cash-payment-icon.png',
   },
   {
     value: PaymentMethod.KBZ_PAY,
-    label: "KBZ Pay",
+    label: 'KBZ Pay',
     icon: '/images/kbz-pay-icon.png',
   },
   {
     value: PaymentMethod.WAVE_MONEY,
-    label: "Wave Money",
+    label: 'Wave Money',
     icon: '/images/wave-money-icon.png',
   },
 ];

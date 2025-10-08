@@ -24,7 +24,7 @@ export default function EmptyOrder() {
         Bạn chưa có đơn hàng nào
       </h3>
       <pre className="text-primary-400 text-sm font-medium mb-4">
-        {`Có vẻ như bạn chưa đặt món nào.\nHãy quay lại và chọn đồ uống nhé!`}
+        {'Có vẻ như bạn chưa đặt món nào.\nHãy quay lại và chọn đồ uống nhé!'}
       </pre>
       <ButtonFilled onClick={handleContinueClick}>
         Tiếp tục mua hàng

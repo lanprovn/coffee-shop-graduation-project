@@ -20,7 +20,7 @@ interface LineChartProps {
 export default function LineChart({ data, title, height = 300 }: LineChartProps) {
   const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) {return null;}
 
   const maxRevenue = Math.max(...data.map(d => d.revenue));
   const minRevenue = Math.min(...data.map(d => d.revenue));

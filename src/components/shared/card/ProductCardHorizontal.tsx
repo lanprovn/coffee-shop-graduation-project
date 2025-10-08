@@ -57,8 +57,8 @@ export default function ProductCardHorizontal({ coffee }: ProductCardProps) {
       <div className="absolute bottom-2 right-2">
         <div
           className={classNames(
-            "inline-flex items-center justify-center w-7 h-7 rounded-full cursor-pointer transition-all duration-200",
-            isSameItem ? "text-primary border border-primary hover:bg-primary/5" : "bg-primary text-white hover:bg-primary-600 hover:scale-110"
+            'inline-flex items-center justify-center w-7 h-7 rounded-full cursor-pointer transition-all duration-200',
+            isSameItem ? 'text-primary border border-primary hover:bg-primary/5' : 'bg-primary text-white hover:bg-primary-600 hover:scale-110'
           )}
           onClick={handleAddToCart}
           title={isSameItem ? 'Đã thêm vào giỏ' : 'Thêm vào giỏ hàng'}

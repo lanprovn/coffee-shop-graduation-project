@@ -243,8 +243,8 @@ export default function LoyaltyPage() {
                   className="w-full"
                 >
                   {!reward.available ? 'Hết hàng' : 
-                   loyaltyData.currentPoints < reward.pointsRequired ? 'Không đủ điểm' : 
-                   'Đổi ngay'}
+                    loyaltyData.currentPoints < reward.pointsRequired ? 'Không đủ điểm' : 
+                      'Đổi ngay'}
                 </ButtonFilled>
               </div>
             ))}

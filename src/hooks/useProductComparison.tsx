@@ -120,9 +120,9 @@ export function ComparisonButton({ product, className = '' }: ComparisonButtonPr
         flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
         transition-colors duration-200
         ${isCompared 
-          ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' 
-          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-        }
+      ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' 
+      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+    }
         ${className}
       `}
       title={isCompared ? 'Xóa khỏi so sánh' : 'Thêm vào so sánh'}

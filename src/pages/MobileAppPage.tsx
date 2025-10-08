@@ -24,31 +24,31 @@ export default function MobileAppPage() {
   const features = [
     {
       icon: <SparklesIcon className="w-6 h-6" />,
-      title: "Đặt hàng nhanh chóng",
-      description: "Đặt cà phê yêu thích chỉ với vài thao tác"
+      title: 'Đặt hàng nhanh chóng',
+      description: 'Đặt cà phê yêu thích chỉ với vài thao tác'
     },
     {
       icon: <ClockIcon className="w-6 h-6" />,
-      title: "Theo dõi đơn hàng",
-      description: "Xem trạng thái đơn hàng real-time"
+      title: 'Theo dõi đơn hàng',
+      description: 'Xem trạng thái đơn hàng real-time'
     },
     {
       icon: <GiftIcon className="w-6 h-6" />,
-      title: "Tích điểm & đổi quà",
-      description: "Tích điểm mỗi lần mua và đổi nhiều phần thưởng"
+      title: 'Tích điểm & đổi quà',
+      description: 'Tích điểm mỗi lần mua và đổi nhiều phần thưởng'
     },
     {
       icon: <ShieldCheckIcon className="w-6 h-6" />,
-      title: "Thanh toán an toàn",
-      description: "Hỗ trợ nhiều phương thức thanh toán bảo mật"
+      title: 'Thanh toán an toàn',
+      description: 'Hỗ trợ nhiều phương thức thanh toán bảo mật'
     }
   ];
 
   const appStats = [
-    { number: "50K+", label: "Downloads" },
-    { number: "4.8", label: "Rating" },
-    { number: "99%", label: "Uptime" },
-    { number: "24/7", label: "Support" }
+    { number: '50K+', label: 'Downloads' },
+    { number: '4.8', label: 'Rating' },
+    { number: '99%', label: 'Uptime' },
+    { number: '24/7', label: 'Support' }
   ];
 
   return (

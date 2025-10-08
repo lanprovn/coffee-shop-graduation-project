@@ -14,7 +14,7 @@ export default function useOrder(id: string | undefined) {
 
   useEffect(() => {
     const fetchOrder = async () => {
-      if (!id) return;
+      if (!id) {return;}
 
       setIsLoading(true);
       const order = await getOrderById(id);

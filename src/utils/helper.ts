@@ -9,7 +9,7 @@ function formatPrice(price: number): string {
 
 // ✅ Bao bọc kèm xử lý an toàn khi giá không hợp lệ
 export const priceWithSign = (price?: number | null) => {
-  if (typeof price !== 'number' || Number.isNaN(price)) return '';
+  if (typeof price !== 'number' || Number.isNaN(price)) {return '';}
   return `${formatPrice(price)}`;
 };
 

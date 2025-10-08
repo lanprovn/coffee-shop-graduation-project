@@ -8,24 +8,37 @@ import ScrollToTop from './components/shared/ScrollToTop.tsx';
 import Router from './Router.tsx';
 import { SupportChatWidget } from './hooks/useSupportChat';
 import { ShareModal } from './hooks/useSocialShare';
+import ErrorBoundary from './components/shared/ErrorBoundary';
 
 export default function App() {
   return (
-    <NotificationProvider>
-      <AuthProvider>
-        <UserAddressProvider>
-          <ProductProvider>
-            <ShoppingCartProvider>
-              <ModalProvider>
-                <ScrollToTop />
-                <Router />
-                <SupportChatWidget />
-                <ShareModal />
-              </ModalProvider>
-            </ShoppingCartProvider>
-          </ProductProvider>
-        </UserAddressProvider>
-      </AuthProvider>
-    </NotificationProvider>
+    <ErrorBoundary
+      onError={(error, errorInfo) => {
+        // Log error for monitoring
+        console.error('App Error:', error, errorInfo);
+
+        // In production, send to error reporting service
+        if (process.env.NODE_ENV === 'production') {
+          // Example: Sentry.captureException(error, { extra: errorInfo });
+        }
+      }}
+    >
+      <NotificationProvider>
+        <AuthProvider>
+          <UserAddressProvider>
+            <ProductProvider>
+              <ShoppingCartProvider>
+                <ModalProvider>
+                  <ScrollToTop />
+                  <Router />
+                  <SupportChatWidget />
+                  <ShareModal />
+                </ModalProvider>
+              </ShoppingCartProvider>
+            </ProductProvider>
+          </UserAddressProvider>
+        </AuthProvider>
+      </NotificationProvider>
+    </ErrorBoundary>
   );
 }

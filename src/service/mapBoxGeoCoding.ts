@@ -5,14 +5,15 @@
  * Không có API calls thực đến Mapbox
  */
 
-import { LatLng } from '../types';
+import { LatLng } from '@/types';
 
 export const getAddrFromCoordinate = async (
   coordinate: LatLng
 ): Promise<string> => {
   try {
     // Mock implementation - simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    const API_DELAY_MS = 500;
+    await new Promise(resolve => setTimeout(resolve, API_DELAY_MS));
 
     // Mock address data based on coordinates
     const mockAddresses = [
@@ -27,10 +28,12 @@ export const getAddrFromCoordinate = async (
     const index = Math.abs(Math.floor(coordinate.lat + coordinate.lng)) % mockAddresses.length;
     const mockAddress = mockAddresses[index];
 
-    console.log('Mock Mapbox Geocoding: Returning mock address:', mockAddress);
+    // Mock Mapbox Geocoding: Returning mock address
+    // console.log('Mock Mapbox Geocoding: Returning mock address:', mockAddress);
     return mockAddress;
   } catch (error) {
-    console.error('Mock Mapbox Geocoding Error:', error);
+    // Mock Mapbox Geocoding Error logged for development
+    // console.error('Mock Mapbox Geocoding Error:', error);
     return 'Địa chỉ không xác định';
   }
 };

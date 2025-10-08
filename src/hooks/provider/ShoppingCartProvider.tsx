@@ -1,8 +1,9 @@
 import React, { ReactNode, useCallback, useMemo, useState } from 'react';
 import { CartItem, CoffeeProduct, DeliOption, PaymentMethod, ProductSize, Topping } from '@/types';
-import ShoppingCartContext from '../context/ShoppingCartContext';
+import ShoppingCartContext from '@/hooks/context/ShoppingCartContext';
 import { getSumFromArr } from '@/utils/helper';
 import { defaultDeliFee } from '@/constants/constants';
+import { trackAddToCart, trackRemoveFromCart, trackBeginCheckout } from '@/utils/analytics';
 
 interface ShoppingCartProviderProps {
   children: ReactNode;
@@ -58,6 +59,15 @@ const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
     } else {
       // Thêm mới
       setItems((prevCart) => [...prevCart, newItem]);
+
+      // Track analytics
+      trackAddToCart(
+        product.id,
+        product.displayName,
+        product.category,
+        quantity,
+        unitPrice
+      );
     }
   };
 
@@ -84,6 +94,18 @@ const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
   };
 
   const removeFromCart = (itemIndex: number) => {
+    const itemToRemove = items[itemIndex];
+    if (itemToRemove) {
+      // Track analytics
+      trackRemoveFromCart(
+        itemToRemove.product.id,
+        itemToRemove.product.displayName,
+        itemToRemove.product.category,
+        itemToRemove.quantity,
+        itemToRemove.unitPrice
+      );
+    }
+
     setItems((prevCart) =>
       prevCart.filter((_, index) => index !== itemIndex)
     );

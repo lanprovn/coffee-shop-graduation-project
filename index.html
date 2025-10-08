@@ -4,35 +4,114 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Coffee Shop</title>
-  <meta name="description" content="Coffee Shop - Đặt cà phê online" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+  <!-- SEO Meta Tags -->
+  <title>Coffee Shop - Premium Coffee & Beverages</title>
+  <meta name="description"
+    content="Khám phá thế giới cà phê cao cấp tại Coffee Shop. Từ cà phê truyền thống đến các thức uống hiện đại, chúng tôi mang đến trải nghiệm tuyệt vời nhất." />
+  <meta name="keywords"
+    content="cà phê, coffee, thức uống, beverage, coffee shop, cà phê cao cấp, espresso, latte, cappuccino" />
+  <meta name="author" content="Coffee Shop" />
+  <meta name="robots" content="index, follow" />
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json" />
 
   <!-- PWA Meta Tags -->
-  <meta name="theme-color" content="#8B4513" />
+  <meta name="theme-color" content="#006241" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Coffee Shop" />
+  <link rel="apple-touch-icon" href="/images/app-logo.png" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Coffee Shop">
-  <meta property="og:description" content="Coffee Shop - Đặt cà phê online" />
+  <meta property="og:title" content="Coffee Shop - Premium Coffee & Beverages">
+  <meta property="og:description"
+    content="Khám phá thế giới cà phê cao cấp tại Coffee Shop. Từ cà phê truyền thống đến các thức uống hiện đại." />
   <meta property="og:site_name" content="Coffee Shop" />
   <meta property="og:image" content="/images/home-open-graph.png">
+  <meta property="og:url" content="https://coffeeshop.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
 
   <!-- Twitter -->
-  <meta property="twitter:title" content="Coffee Shop">
-  <meta property="twitter:description" content="Coffee Shop - Đặt cà phê online" />
+  <meta property="twitter:title" content="Coffee Shop - Premium Coffee & Beverages">
+  <meta property="twitter:description" content="Khám phá thế giới cà phê cao cấp tại Coffee Shop." />
   <meta property="twitter:image" content="/images/home-open-graph.png">
   <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="@coffeeshop" />
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="/images/app-logo.svg" as="image" type="image/svg+xml" />
+  <link rel="preload" href="/images/home-open-graph.png" as="image" />
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="//www.google-analytics.com" />
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Critical CSS -->
+  <style>
+    /* Critical above-the-fold styles */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f4f0;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f8f4f0;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #006241;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Loading fallback -->
+    <div class="loading">
+      <div class="spinner"></div>
+    </div>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

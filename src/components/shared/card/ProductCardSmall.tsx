@@ -1,7 +1,6 @@
 import { PlusIcon, StarIcon } from '@heroicons/react/24/solid';
 import { useNavigate } from 'react-router-dom';
 import { useShoppingCart } from '@/hooks/useShoppingCart';
-import { useModal } from '@/hooks/useModal';
 import { useReview } from '@/hooks/useReview';
 import { classNames } from '@/utils/helper';
 import { ProductCardProps } from './type';
@@ -11,7 +10,6 @@ export default function ProductCardSmall({ coffee }: ProductCardProps) {
   const { items, addItem } = useShoppingCart();
   const isSameItem = items?.filter((i) => i.product.id === coffee.id)[0];
   // Modal Provider
-  const { showProductModal } = useModal();
   // Review
   const { getProductRating } = useReview();
   const rating = getProductRating(coffee.id);
@@ -50,36 +48,36 @@ export default function ProductCardSmall({ coffee }: ProductCardProps) {
   // Category-based styling
   const getCategoryStyle = (category: string) => {
     switch (category) {
-      case 'coffee':
-        return {
-          badge: 'bg-gradient-to-r from-amber-500 to-amber-600 text-white',
-          accent: 'border-amber-200',
-          hover: 'hover:border-amber-300'
-        };
-      case 'tea':
-        return {
-          badge: 'bg-gradient-to-r from-green-500 to-green-600 text-white',
-          accent: 'border-green-200',
-          hover: 'hover:border-green-300'
-        };
-      case 'freeze':
-        return {
-          badge: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white',
-          accent: 'border-blue-200',
-          hover: 'hover:border-blue-300'
-        };
-      case 'cake':
-        return {
-          badge: 'bg-gradient-to-r from-pink-500 to-pink-600 text-white',
-          accent: 'border-pink-200',
-          hover: 'hover:border-pink-300'
-        };
-      default:
-        return {
-          badge: 'bg-gradient-to-r from-gray-500 to-gray-600 text-white',
-          accent: 'border-gray-200',
-          hover: 'hover:border-gray-300'
-        };
+    case 'coffee':
+      return {
+        badge: 'bg-gradient-to-r from-amber-500 to-amber-600 text-white',
+        accent: 'border-amber-200',
+        hover: 'hover:border-amber-300'
+      };
+    case 'tea':
+      return {
+        badge: 'bg-gradient-to-r from-green-500 to-green-600 text-white',
+        accent: 'border-green-200',
+        hover: 'hover:border-green-300'
+      };
+    case 'freeze':
+      return {
+        badge: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white',
+        accent: 'border-blue-200',
+        hover: 'hover:border-blue-300'
+      };
+    case 'cake':
+      return {
+        badge: 'bg-gradient-to-r from-pink-500 to-pink-600 text-white',
+        accent: 'border-pink-200',
+        hover: 'hover:border-pink-300'
+      };
+    default:
+      return {
+        badge: 'bg-gradient-to-r from-gray-500 to-gray-600 text-white',
+        accent: 'border-gray-200',
+        hover: 'hover:border-gray-300'
+      };
     }
   };
 
@@ -93,9 +91,9 @@ export default function ProductCardSmall({ coffee }: ProductCardProps) {
 
   let badge = tag;
   if (!badge) {
-    if (randomBestSeller) badge = 'Bán chạy';
-    else if (randomNew) badge = 'Mới';
-    else if (randomPopular) badge = 'Phổ biến';
+    if (randomBestSeller) {badge = 'Bán chạy';}
+    else if (randomNew) {badge = 'Mới';}
+    else if (randomPopular) {badge = 'Phổ biến';}
   }
 
   const badgeStyle = badge === 'Bán chạy'
@@ -107,7 +105,7 @@ export default function ProductCardSmall({ coffee }: ProductCardProps) {
   return (
     <div
       onClick={handleClick}
-      className={`relative w-full bg-white border-2 ${categoryStyle.accent} rounded-3xl p-5 cursor-pointer group hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] ${categoryStyle.hover} hover:shadow-primary/10`}
+      className={`mobile-card card-micro hover-lift relative w-full bg-white border-2 ${categoryStyle.accent} rounded-3xl p-5 cursor-pointer group hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] ${categoryStyle.hover} hover:shadow-primary/10`}
     >
       {/* Category Badge */}
       <div className={`absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full ${categoryStyle.badge} shadow-lg z-10`}>

@@ -21,7 +21,7 @@ interface BarChartProps {
 export default function BarChart({ data, title, height = 300, color = '#3B82F6' }: BarChartProps) {
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) {return null;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const chartWidth = 500;

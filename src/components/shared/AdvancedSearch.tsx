@@ -103,23 +103,23 @@ export default function AdvancedSearch() {
       let aValue: any, bValue: any;
       
       switch (filters.sortBy) {
-        case 'name':
-          aValue = a.displayName;
-          bValue = b.displayName;
-          break;
-        case 'price':
-          aValue = Math.min(...a.sizes.map(s => s.price));
-          bValue = Math.min(...b.sizes.map(s => s.price));
-          break;
-        case 'rating':
-          aValue = Math.random() * 5; // Mock rating
-          bValue = Math.random() * 5;
-          break;
-        case 'popularity':
-        default:
-          aValue = Math.random() * 100; // Mock popularity
-          bValue = Math.random() * 100;
-          break;
+      case 'name':
+        aValue = a.displayName;
+        bValue = b.displayName;
+        break;
+      case 'price':
+        aValue = Math.min(...a.sizes.map(s => s.price));
+        bValue = Math.min(...b.sizes.map(s => s.price));
+        break;
+      case 'rating':
+        aValue = Math.random() * 5; // Mock rating
+        bValue = Math.random() * 5;
+        break;
+      case 'popularity':
+      default:
+        aValue = Math.random() * 100; // Mock popularity
+        bValue = Math.random() * 100;
+        break;
       }
 
       if (filters.sortOrder === 'asc') {
@@ -138,11 +138,11 @@ export default function AdvancedSearch() {
     
     // Update URL params
     const params = new URLSearchParams();
-    if (updated.query) params.set('q', updated.query);
-    if (updated.category !== 'all') params.set('category', updated.category);
-    if (updated.priceRange[0] > 0) params.set('minPrice', updated.priceRange[0].toString());
-    if (updated.priceRange[1] < 200000) params.set('maxPrice', updated.priceRange[1].toString());
-    if (updated.rating > 0) params.set('rating', updated.rating.toString());
+    if (updated.query) {params.set('q', updated.query);}
+    if (updated.category !== 'all') {params.set('category', updated.category);}
+    if (updated.priceRange[0] > 0) {params.set('minPrice', updated.priceRange[0].toString());}
+    if (updated.priceRange[1] < 200000) {params.set('maxPrice', updated.priceRange[1].toString());}
+    if (updated.rating > 0) {params.set('rating', updated.rating.toString());}
     params.set('sortBy', updated.sortBy);
     params.set('sortOrder', updated.sortOrder);
     

@@ -19,7 +19,7 @@ class PerformanceMonitor {
   }
 
   measureFPS() {
-    if (!this.isMonitoring) return;
+    if (!this.isMonitoring) { return; }
 
     const currentTime = performance.now();
     this.frameCount++;
@@ -28,7 +28,7 @@ class PerformanceMonitor {
       this.fps = Math.round((this.frameCount * 1000) / (currentTime - this.lastTime));
       this.frameCount = 0;
       this.lastTime = currentTime;
-      
+
       // Update FPS display if exists
       const fpsDisplay = document.getElementById('fps-counter');
       if (fpsDisplay) {
@@ -49,13 +49,13 @@ class SmoothScroller {
   }
 
   scrollTo(element, duration = 300) {
-    if (this.isScrolling) return;
-    
+    if (this.isScrolling) { return; }
+
     this.isScrolling = true;
     this.scrollDuration = duration;
-    
+
     const target = typeof element === 'string' ? document.querySelector(element) : element;
-    if (!target) return;
+    if (!target) { return; }
 
     const startPosition = window.pageYOffset;
     const targetPosition = target.offsetTop;
@@ -70,9 +70,9 @@ class SmoothScroller {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = easeInOutCubic(progress);
-      
+
       window.scrollTo(0, startPosition + distance * easedProgress);
-      
+
       if (progress < 1) {
         requestAnimationFrame(animateScroll);
       } else {
@@ -105,11 +105,11 @@ class TouchGestureHandler {
   handleTouchEnd(event) {
     this.touchEndX = event.changedTouches[0].clientX;
     this.touchEndY = event.changedTouches[0].clientY;
-    
+
     const swipeTime = performance.now() - this.swipeStartTime;
     const swipeDistanceX = this.touchEndX - this.touchStartX;
     const swipeDistanceY = this.touchEndY - this.touchStartY;
-    
+
     if (swipeTime <= this.maxSwipeTime) {
       if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
         if (Math.abs(swipeDistanceX) > this.minSwipeDistance) {
@@ -132,22 +132,26 @@ class TouchGestureHandler {
   }
 
   onSwipeLeft() {
-    console.log('Swipe Left');
+    // Swipe Left logged for development
+    // console.log('Swipe Left');
     // Implement swipe left logic
   }
 
   onSwipeRight() {
-    console.log('Swipe Right');
+    // Swipe Right logged for development
+    // console.log('Swipe Right');
     // Implement swipe right logic
   }
 
   onSwipeUp() {
-    console.log('Swipe Up');
+    // Swipe Up logged for development
+    // console.log('Swipe Up');
     // Implement swipe up logic
   }
 
   onSwipeDown() {
-    console.log('Swipe Down');
+    // Swipe Down logged for development
+    // console.log('Swipe Down');
     // Implement swipe down logic
   }
 }
@@ -200,19 +204,19 @@ function debounce(func, wait, immediate) {
   return function executedFunction(...args) {
     const later = () => {
       timeout = null;
-      if (!immediate) func(...args);
+      if (!immediate) { func(...args); }
     };
     const callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
-    if (callNow) func(...args);
+    if (callNow) { func(...args); }
   };
 }
 
 // Throttle Utility
 function throttle(func, limit) {
   let inThrottle;
-  return function(...args) {
+  return function (...args) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
@@ -230,7 +234,7 @@ class SmoothAnimator {
   animate(element, properties, duration = 300, easing = 'ease-out') {
     const startTime = performance.now();
     const startValues = {};
-    
+
     // Get initial values
     Object.keys(properties).forEach(prop => {
       startValues[prop] = this.getComputedValue(element, prop);
@@ -242,15 +246,15 @@ class SmoothAnimator {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = easing === 'ease-out' ? easeOutCubic(progress) : progress;
-      
+
       Object.keys(properties).forEach(prop => {
         const startValue = startValues[prop];
         const endValue = properties[prop];
         const currentValue = startValue + (endValue - startValue) * easedProgress;
-        
+
         this.setStyle(element, prop, currentValue);
       });
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
@@ -287,7 +291,7 @@ class OptimizedEventListeners {
   init() {
     window.addEventListener('resize', this.throttledResize, { passive: true });
     window.addEventListener('scroll', this.throttledScroll, { passive: true });
-    
+
     // Touch events for mobile
     if ('ontouchstart' in window) {
       document.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
@@ -302,9 +306,9 @@ class OptimizedEventListeners {
 
   handleScroll() {
     // Handle scroll events
-    this.dispatchEvent('scroll', { 
-      scrollX: window.scrollX, 
-      scrollY: window.scrollY 
+    this.dispatchEvent('scroll', {
+      scrollX: window.scrollX,
+      scrollY: window.scrollY
     });
   }
 
@@ -333,23 +337,23 @@ class OptimizedEventListeners {
 function initPerformanceOptimizations() {
   // Initialize performance monitor
   const performanceMonitor = new PerformanceMonitor();
-  
+
   // Initialize smooth scroller
   const smoothScroller = new SmoothScroller();
-  
+
   // Initialize touch gesture handler
   const touchHandler = new TouchGestureHandler();
-  
+
   // Initialize lazy image loader
   const lazyLoader = new LazyImageLoader();
-  
+
   // Initialize smooth animator
   const smoothAnimator = new SmoothAnimator();
-  
+
   // Initialize optimized event listeners
   const eventListeners = new OptimizedEventListeners();
   eventListeners.init();
-  
+
   // Add smooth scrolling to all anchor links
   document.addEventListener('click', (event) => {
     const target = event.target.closest('a[href^="#"]');
@@ -362,31 +366,31 @@ function initPerformanceOptimizations() {
       }
     }
   });
-  
+
   // Add touch event listeners
   document.addEventListener('touchstart', touchHandler.handleTouchStart.bind(touchHandler), { passive: true });
   document.addEventListener('touchend', touchHandler.handleTouchEnd.bind(touchHandler), { passive: true });
-  
+
   // Initialize lazy loading for all images with data-src
   document.querySelectorAll('img[data-src]').forEach(img => {
     lazyLoader.observe(img);
   });
-  
+
   // Add performance classes to elements
   document.querySelectorAll('.btn, .card, .nav-item').forEach(element => {
     element.classList.add('smooth-transition', 'gpu-layer');
   });
-  
+
   // Add touch feedback to interactive elements
   document.querySelectorAll('button, .btn, .card').forEach(element => {
     element.classList.add('touch-feedback', 'no-tap-highlight');
   });
-  
+
   // Start performance monitoring in development
   if (process.env.NODE_ENV === 'development') {
     performanceMonitor.start();
   }
-  
+
   return {
     performanceMonitor,
     smoothScroller,

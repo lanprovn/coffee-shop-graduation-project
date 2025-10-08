@@ -1,4 +1,4 @@
-import Title1 from '../typo/Title1';
+import Title1 from '@/components/shared/typo/Title1';
 
 interface DocTitle1Props {
   children: string;

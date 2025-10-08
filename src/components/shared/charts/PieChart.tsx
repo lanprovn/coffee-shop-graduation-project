@@ -19,7 +19,7 @@ interface PieChartProps {
 export default function PieChart({ data, title, size = 300 }: PieChartProps) {
   const [hoveredSlice, setHoveredSlice] = useState<number | null>(null);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) {return null;}
 
   const total = data.reduce((sum, item) => sum + item.value, 0);
   const centerX = size / 2;

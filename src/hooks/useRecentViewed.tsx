@@ -123,7 +123,7 @@ interface RecentlyViewedProps {
 }
 
 export function RecentlyViewed({ 
-  title = "Sản phẩm đã xem gần đây",
+  title = 'Sản phẩm đã xem gần đây',
   maxItems = 5,
   showViewCount = false,
   className = ''
@@ -139,9 +139,9 @@ export function RecentlyViewed({
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (minutes < 1) return 'Vừa xong';
-    if (minutes < 60) return `${minutes} phút trước`;
-    if (hours < 24) return `${hours} giờ trước`;
+    if (minutes < 1) {return 'Vừa xong';}
+    if (minutes < 60) {return `${minutes} phút trước`;}
+    if (hours < 24) {return `${hours} giờ trước`;}
     return `${days} ngày trước`;
   };
 
@@ -252,9 +252,9 @@ export function RecentViewedPage() {
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (minutes < 1) return 'Vừa xong';
-    if (minutes < 60) return `${minutes} phút trước`;
-    if (hours < 24) return `${hours} giờ trước`;
+    if (minutes < 1) {return 'Vừa xong';}
+    if (minutes < 60) {return `${minutes} phút trước`;}
+    if (hours < 24) {return `${hours} giờ trước`;}
     return `${days} ngày trước`;
   };
 

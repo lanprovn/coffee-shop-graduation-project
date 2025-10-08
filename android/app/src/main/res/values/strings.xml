@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Coffee Shop</string>
-    <string name="title_activity_main">Coffee Shop</string>
-    <string name="package_name">com.coffeeshop.app</string>
-    <string name="custom_url_scheme">com.coffeeshop.app</string>
-</resources>

@@ -181,29 +181,29 @@ interface ToastNotificationProps {
 function ToastNotification({ notification, onClose }: ToastNotificationProps) {
   const getIcon = () => {
     switch (notification.type) {
-      case 'success':
-        return <CheckCircleIcon className="w-6 h-6 text-green-500" />;
-      case 'error':
-        return <XCircleIcon className="w-6 h-6 text-red-500" />;
-      case 'warning':
-        return <ExclamationTriangleIcon className="w-6 h-6 text-yellow-500" />;
-      case 'info':
-      default:
-        return <InformationCircleIcon className="w-6 h-6 text-blue-500" />;
+    case 'success':
+      return <CheckCircleIcon className="w-6 h-6 text-green-500" />;
+    case 'error':
+      return <XCircleIcon className="w-6 h-6 text-red-500" />;
+    case 'warning':
+      return <ExclamationTriangleIcon className="w-6 h-6 text-yellow-500" />;
+    case 'info':
+    default:
+      return <InformationCircleIcon className="w-6 h-6 text-blue-500" />;
     }
   };
 
   const getBgColor = () => {
     switch (notification.type) {
-      case 'success':
-        return 'bg-green-50 border-green-200';
-      case 'error':
-        return 'bg-red-50 border-red-200';
-      case 'warning':
-        return 'bg-yellow-50 border-yellow-200';
-      case 'info':
-      default:
-        return 'bg-blue-50 border-blue-200';
+    case 'success':
+      return 'bg-green-50 border-green-200';
+    case 'error':
+      return 'bg-red-50 border-red-200';
+    case 'warning':
+      return 'bg-yellow-50 border-yellow-200';
+    case 'info':
+    default:
+      return 'bg-blue-50 border-blue-200';
     }
   };
 
@@ -266,9 +266,9 @@ export function NotificationCenter() {
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (minutes < 1) return 'Vừa xong';
-    if (minutes < 60) return `${minutes} phút trước`;
-    if (hours < 24) return `${hours} giờ trước`;
+    if (minutes < 1) {return 'Vừa xong';}
+    if (minutes < 60) {return `${minutes} phút trước`;}
+    if (hours < 24) {return `${hours} giờ trước`;}
     return `${days} ngày trước`;
   };
 

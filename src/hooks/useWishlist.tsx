@@ -134,9 +134,9 @@ export function WishlistButton({
         flex items-center gap-2 p-2 rounded-lg
         transition-colors duration-200
         ${isWishlisted 
-          ? 'text-red-500 hover:text-red-600 hover:bg-red-50' 
-          : 'text-gray-400 hover:text-red-500 hover:bg-red-50'
-        }
+      ? 'text-red-500 hover:text-red-600 hover:bg-red-50' 
+      : 'text-gray-400 hover:text-red-500 hover:bg-red-50'
+    }
         ${sizeClasses[size]}
         ${className}
       `}
