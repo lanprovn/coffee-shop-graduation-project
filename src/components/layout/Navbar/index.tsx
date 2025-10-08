@@ -19,6 +19,7 @@ import { ProductCategory } from '@/types';
 import { useDebounce, useOptimizedCallback } from '@/hooks/usePerformance';
 import BackButton from '@/components/shared/BackButton';
 import ThemeToggle from '@/components/shared/ThemeToggle';
+import AdvancedSearch from '@/components/shared/AdvancedSearch';
 import { useIsMobile } from '@/hooks/useMobileBack';
 
 export default function Navbar() {
@@ -220,6 +221,15 @@ export default function Navbar() {
             {/* Right side items */}
             <div className="hidden lg:block">
               <div className="ml-4 flex items-center md:ml-6">
+                {/* Advanced Search */}
+                <AdvancedSearch 
+                  className="mr-4 w-80"
+                  placeholder="Tìm kiếm sản phẩm..."
+                  onSearch={(query) => {
+                    navigate(`/search?q=${encodeURIComponent(query)}`);
+                  }}
+                />
+
                 {/* User Profile */}
                 <Link
                   to={user?.name ? '/profile' : '/login'}

@@ -14,12 +14,20 @@ import { ErrorBoundary } from './components/shared/LoadingStates';
 import { AccessibilitySettings, LiveRegion } from './components/shared/Accessibility';
 import { useAnnouncer } from './components/shared/Accessibility';
 import { useTheme } from './hooks/useTheme';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 function AppContent() {
   const { announce, announcement } = useAnnouncer();
   
   // Initialize theme system
   useTheme();
+  
+  // Initialize keyboard shortcuts
+  const { HelpModal } = useKeyboardShortcuts({
+    enabled: true,
+    showHelp: true,
+    helpKey: '?',
+  });
 
   return (
     <>
@@ -29,6 +37,7 @@ function AppContent() {
       <ShareModal />
       <AccessibilitySettings />
       <LiveRegion announcement={announcement} />
+      <HelpModal />
     </>
   );
 }
