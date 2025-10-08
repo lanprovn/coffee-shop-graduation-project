@@ -1,3 +1,4 @@
+import React from 'react';
 import AuthProvider from './hooks/provider/AuthProvider';
 import ProductProvider from './hooks/provider/ProductProvider';
 import ShoppingCartProvider from './hooks/provider/ShoppingCartProvider';
