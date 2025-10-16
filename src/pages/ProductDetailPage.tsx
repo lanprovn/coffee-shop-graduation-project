@@ -238,6 +238,17 @@ export default function ProductDetailPage() {
                 rows={3}
               />
             </div>
+
+            {/* Add to Cart Button - Center */}
+            <div className="mt-8">
+              <button
+                onClick={handleAddToCart}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
+              >
+                <ShoppingCartIcon className="w-6 h-6" />
+                <span>Thêm vào giỏ hàng</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -251,9 +262,9 @@ export default function ProductDetailPage() {
           </h3>
         </div>
 
-        <div className="flex-1 p-6 flex flex-col justify-end">
+        <div className="flex-1 p-6 flex flex-col justify-between">
+          {/* Product Preview */}
           <div className="space-y-4">
-            {/* Product Preview */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-orange-100 rounded-lg overflow-hidden">
@@ -294,18 +305,21 @@ export default function ProductDetailPage() {
                 </div>
               </div>
             </div>
+          </div>
 
+          {/* Bottom Section - Total and Add to Cart */}
+          <div className="space-y-4">
             {/* Total */}
-            <div className="text-2xl font-bold text-orange-500 mb-4">
+            <div className="text-2xl font-bold text-orange-500 text-center">
               Tổng cộng: {calculateTotalPrice().toLocaleString('vi-VN')} ₫
             </div>
 
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
             >
-              <ShoppingCartIcon className="w-5 h-5" />
+              <ShoppingCartIcon className="w-6 h-6" />
               <span>Thêm vào giỏ hàng</span>
             </button>
           </div>
