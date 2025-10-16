@@ -4,11 +4,12 @@ import PageLoading from '@/components/shared/PageLoading';
 
 // POS Kiosk - Lazy load for better performance
 const POSKioskApp = lazy(() => import('@/pages/POSKioskApp'));
+const CheckoutPage = lazy(() => import('@/pages/CheckoutPage'));
 
 /**
- * POS Kiosk Router - Only POS routes
+ * POS Kiosk Router - POS and Checkout routes
  * 
- * Chỉ chứa route POS Kiosk
+ * Chứa route POS Kiosk và Checkout
  */
 export default function Router() {
   return (
@@ -17,6 +18,9 @@ export default function Router() {
         {/* POS Kiosk - Main route */}
         <Route path="/" element={<POSKioskApp />} />
         <Route path="/pos" element={<POSKioskApp />} />
+        
+        {/* Checkout Page */}
+        <Route path="/checkout" element={<CheckoutPage />} />
         
         {/* Redirect all other routes to POS */}
         <Route path="*" element={<POSKioskApp />} />

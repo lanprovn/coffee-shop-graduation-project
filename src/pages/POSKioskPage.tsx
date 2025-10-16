@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useKiosk } from '@/hooks/context/KioskContext';
 import { useShoppingCart } from '@/hooks/useShoppingCart';
 import { useProduct } from '@/hooks/useProduct';
@@ -15,6 +16,7 @@ import {
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 import { priceWithSign } from '@/utils/helper';
+import ProductDetailModal from '@/components/shared/ProductDetailModal';
 
 // Category Sidebar Component
 const CategorySidebar: React.FC<{
@@ -290,6 +292,7 @@ const CartSidebar: React.FC<{
 };
 
 export default function POSKioskPage() {
+  const navigate = useNavigate();
   const { 
     addToCart, 
     removeFromCart, 
@@ -308,6 +311,8 @@ export default function POSKioskPage() {
   
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [tax] = useState(0.05); // 5% tax
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<CoffeeProduct | null>(null);
 
   // Create new order when component mounts
   useEffect(() => {
@@ -316,7 +321,33 @@ export default function POSKioskPage() {
   }, [clearCart]);
 
   const handleAddToCart = (product: CoffeeProduct) => {
-    addToCart(product, 1);
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
+  };
+
+  const handleAddToCartFromModal = (product: CoffeeProduct, quantity: number, size: string, toppings: string[], notes: string) => {
+    // Create a custom product with size and toppings
+    const customProduct: CoffeeProduct = {
+      ...product,
+      displayName: `${product.displayName} (${size})`,
+      price: product.price + (size === 'Vừa' ? 5000 : size === 'Lớn' ? 10000 : 0)
+    };
+    
+    // Add toppings price
+    const toppingPrices = {
+      'Thêm sữa': 3000,
+      'Kem tươi': 5000,
+      'Caramel': 8000
+    };
+    
+    const totalToppingPrice = toppings.reduce((total, topping) => {
+      return total + (toppingPrices[topping as keyof typeof toppingPrices] || 0);
+    }, 0);
+    
+    customProduct.price += totalToppingPrice;
+    
+    // Add to cart with custom details
+    addToCart(customProduct, quantity);
   };
 
   const handleUpdateQuantity = (index: number, quantity: number) => {
@@ -336,8 +367,8 @@ export default function POSKioskPage() {
   };
 
   const handleProceedToPayment = () => {
-    // Navigate to payment page
-    window.location.href = '/payment';
+    // Navigate to checkout page
+    navigate('/checkout');
   };
 
   // Calculate totals
@@ -417,6 +448,14 @@ export default function POSKioskPage() {
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
         onProceedToPayment={handleProceedToPayment}
+      />
+
+      {/* Product Detail Modal */}
+      <ProductDetailModal
+        isOpen={isProductModalOpen}
+        onClose={() => setIsProductModalOpen(false)}
+        product={selectedProduct}
+        onAddToCart={handleAddToCartFromModal}
       />
     </div>
   );
