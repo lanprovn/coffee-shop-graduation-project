@@ -24,6 +24,8 @@ export enum ProductCategory {
   Tea = 'tea',
   Freeze = 'freeze',
   Cake = 'cake',
+  Food = 'food',
+  Dessert = 'dessert',
 }
 
 export enum ProductSize {
@@ -59,7 +61,9 @@ export interface ProductNutrition {
 export interface CoffeeProduct {
   id: string;
   name: string;
+  displayName: string;
   description: string;
+  basePrice: number;
   price: number;
   originalPrice?: number;
   image: string;
@@ -326,3 +330,64 @@ export type HeroIcon = React.ComponentType<
     titleId?: string | undefined;
   }
 >;
+
+// POS Kiosk Types
+export enum KioskMode {
+  ORDER = 'order',
+  PAYMENT = 'payment',
+  RECEIPT = 'receipt',
+  ADMIN = 'admin'
+}
+
+export interface KioskOrder {
+  id: string;
+  items: CartItem[];
+  subtotal: number;
+  tax: number;
+  total: number;
+  paymentMethod: PaymentMethod;
+  status: 'pending' | 'paid' | 'completed' | 'cancelled';
+  createdAt: string;
+  completedAt?: string;
+  cashierId?: string;
+  notes?: string;
+}
+
+export interface KioskSettings {
+  storeName: string;
+  storeAddress: string;
+  taxRate: number;
+  currency: string;
+  receiptFooter: string;
+  autoLogoutMinutes: number;
+  printerSettings: {
+    enabled: boolean;
+    printerName: string;
+    paperSize: string;
+  };
+  cashDrawerSettings: {
+    enabled: boolean;
+    openCommand: string;
+  };
+}
+
+export interface HardwareDevice {
+  type: 'printer' | 'cash_drawer' | 'scanner' | 'display';
+  name: string;
+  status: 'connected' | 'disconnected' | 'error';
+  lastChecked: string;
+}
+
+export interface KioskStats {
+  totalOrders: number;
+  totalRevenue: number;
+  averageOrderValue: number;
+  ordersToday: number;
+  revenueToday: number;
+  topProducts: Array<{
+    productId: string;
+    productName: string;
+    quantity: number;
+    revenue: number;
+  }>;
+}

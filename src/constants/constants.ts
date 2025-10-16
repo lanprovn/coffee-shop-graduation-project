@@ -56,3 +56,35 @@ export const paymentMethodOptions = [
     icon: '/images/wave-money-icon.png',
   },
 ];
+
+// POS Kiosk Constants
+export const KIOSK_DEFAULT_SETTINGS = {
+  storeName: 'Highland Coffee',
+  storeAddress: '123 Main Street, Yangon, Myanmar',
+  taxRate: 0.05, // 5%
+  currency: 'MMK',
+  receiptFooter: 'Thank you for your visit!',
+  autoLogoutMinutes: 30,
+  printerSettings: {
+    enabled: true,
+    printerName: 'POS Printer',
+    paperSize: '80mm'
+  },
+  cashDrawerSettings: {
+    enabled: true,
+    openCommand: 'ESC/POS'
+  }
+};
+
+export const KIOSK_TOUCH_TARGET_SIZE = {
+  min: 44, // Minimum touch target size in pixels
+  recommended: 48,
+  large: 56
+};
+
+export const KIOSK_LAYOUT_BREAKPOINTS = {
+  small: 768,
+  medium: 1024,
+  large: 1440,
+  xlarge: 1920
+};

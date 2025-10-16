@@ -3,6 +3,9 @@ import { CoffeeProduct } from '@/types';
 
 interface ProductContextProps {
   coffees: CoffeeProduct[];
+  products: CoffeeProduct[]; // For POS compatibility
+  categories: string[]; // For POS compatibility
+  isLoading: boolean; // For POS compatibility
   icedCoffees: CoffeeProduct[];
   hotCoffees: CoffeeProduct[];
   coffeeProducts: CoffeeProduct[];

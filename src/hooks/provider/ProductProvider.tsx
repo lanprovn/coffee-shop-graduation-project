@@ -41,9 +41,19 @@ const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
     fetchCoffeeList();
   }, []);
 
+  // Get all products and categories for POS
+  const allProducts = coffees;
+  const categories = useMemo(() => {
+    const uniqueCategories = [...new Set(coffees.map(p => p.category))];
+    return uniqueCategories;
+  }, [coffees]);
+
   const value = useMemo(
     () => ({
       coffees,
+      products: allProducts, // For POS compatibility
+      categories, // For POS compatibility
+      isLoading: false, // For POS compatibility
       icedCoffees,
       hotCoffees,
       coffeeProducts,
@@ -51,7 +61,7 @@ const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
       freezeProducts,
       cakeProducts,
     }),
-    [coffees, icedCoffees, hotCoffees, coffeeProducts, teaProducts, freezeProducts, cakeProducts]
+    [coffees, allProducts, categories, icedCoffees, hotCoffees, coffeeProducts, teaProducts, freezeProducts, cakeProducts]
   );
 
   return (
