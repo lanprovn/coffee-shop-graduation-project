@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
 import { useShoppingCart } from '@/hooks/useShoppingCart';
 import { CoffeeProduct } from '@/types';
 import { 
-  ArrowLeftIcon,
   MinusIcon,
   PlusIcon,
   ShoppingCartIcon
 } from '@heroicons/react/24/outline';
-import { priceWithSign } from '@/utils/helper';
+import ProductCustomizer from '@/components/ProductCustomizer';
+import { getProductTotalPrice } from '@/utils/pricing';
 
 export default function ProductDetailPage() {
   const { productId } = useParams<{ productId: string }>();
@@ -25,22 +25,6 @@ export default function ProductDetailPage() {
   // Find product by ID
   const product = products?.find(p => p.id === productId);
 
-  if (!product) {
-    return (
-      <div className="h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy sản phẩm</h2>
-          <button
-            onClick={() => navigate('/pos')}
-            className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600"
-          >
-            Quay lại POS
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   const sizeOptions = [
     { name: 'Nhỏ', price: 0 },
     { name: 'Vừa', price: 5000 },
@@ -54,52 +38,50 @@ export default function ProductDetailPage() {
     { name: 'Caramel', price: 8000 }
   ];
 
-  const calculateTotalPrice = () => {
-    const basePrice = product.price;
-    const sizePrice = sizeOptions.find(s => s.name === selectedSize)?.price || 0;
-    const toppingPrice = selectedToppings.reduce((total, toppingName) => {
-      const topping = toppingOptions.find(t => t.name === toppingName);
-      return total + (topping?.price || 0);
-    }, 0);
-    
-    return (basePrice + sizePrice + toppingPrice) * quantity;
-  };
+  // Calculate total price using helper function
+  const calculateTotalPrice = useMemo(() => {
+    if (!product) return 0;
+    return getProductTotalPrice(
+      product.price,
+      selectedSize,
+      selectedToppings,
+      sizeOptions,
+      toppingOptions
+    );
+  }, [product, selectedSize, selectedToppings]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
+    if (!product) return;
+
     // Create a custom product with size and toppings
     const customProduct: CoffeeProduct = {
       ...product,
       displayName: `${product.displayName} (${selectedSize})`,
-      price: product.price + (selectedSize === 'Vừa' ? 5000 : selectedSize === 'Lớn' ? 10000 : 0)
+      price: calculateTotalPrice
     };
-    
-    // Add toppings price
-    const toppingPrices = {
-      'Thêm sữa': 3000,
-      'Kem tươi': 5000,
-      'Caramel': 8000
-    };
-    
-    const totalToppingPrice = selectedToppings.reduce((total, topping) => {
-      return total + (toppingPrices[topping as keyof typeof toppingPrices] || 0);
-    }, 0);
-    
-    customProduct.price += totalToppingPrice;
     
     // Add to cart
     addToCart(customProduct, quantity);
     
     // Navigate back to POS
     navigate('/pos');
-  };
+  }, [product, selectedSize, calculateTotalPrice, quantity, addToCart, navigate]);
 
-  const toggleTopping = (toppingName: string) => {
-    setSelectedToppings(prev => 
-      prev.includes(toppingName) 
-        ? prev.filter(t => t !== toppingName)
-        : [...prev, toppingName]
+  if (!product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy sản phẩm</h2>
+          <button
+            onClick={() => navigate('/pos')}
+            className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600"
+          >
+            Quay lại POS
+          </button>
+        </div>
+      </div>
     );
-  };
+  }
 
   return (
     <div className="min-h-screen flex bg-white">
@@ -119,89 +101,23 @@ export default function ProductDetailPage() {
       {/* Center - Product Customization */}
       <div className="flex-1 bg-white flex flex-col justify-center p-8">
         <div className="max-w-2xl mx-auto w-full">
-
-          {/* Size Selection */}
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Chọn size</h3>
-            <div className="grid grid-cols-3 gap-4">
-              {sizeOptions.map((size) => (
-                <button
-                  key={size.name}
-                  onClick={() => setSelectedSize(size.name)}
-                  className={`p-4 rounded-xl border-2 transition-all ${
-                    selectedSize === size.name
-                      ? 'border-orange-500 bg-white text-orange-700'
-                      : 'border-gray-200 hover:border-gray-300 bg-gray-50'
-                  }`}
-                >
-                  <div className="font-semibold text-lg">{size.name}</div>
-                  {size.price > 0 && (
-                    <div className="text-sm text-gray-600 mt-1">+{size.price.toLocaleString('vi-VN')} ₫</div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Topping Selection */}
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Chọn topping</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {toppingOptions.map((topping) => (
-                <button
-                  key={topping.name}
-                  onClick={() => toggleTopping(topping.name)}
-                  className={`p-4 rounded-xl border-2 transition-all ${
-                    selectedToppings.includes(topping.name)
-                      ? 'border-orange-500 bg-white text-orange-700'
-                      : 'border-gray-200 hover:border-gray-300 bg-gray-50'
-                  }`}
-                >
-                  <div className="font-semibold text-lg">{topping.name}</div>
-                  {topping.price > 0 && (
-                    <div className="text-sm text-gray-600 mt-1">+{topping.price.toLocaleString('vi-VN')} ₫</div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Quantity */}
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Số lượng</h3>
-            <div className="flex items-center justify-center space-x-4">
-              <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors flex items-center justify-center"
-              >
-                <MinusIcon className="w-6 h-6" />
-              </button>
-              <span className="text-3xl font-bold px-6">{quantity}</span>
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors flex items-center justify-center"
-              >
-                <PlusIcon className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
-
-          {/* Special Notes */}
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Ghi chú đặc biệt</h3>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Ví dụ: Không cay, ít đường..."
-              className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-              rows={3}
-            />
-          </div>
+          <ProductCustomizer
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+            selectedToppings={selectedToppings}
+            setSelectedToppings={setSelectedToppings}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            notes={notes}
+            setNotes={setNotes}
+            sizeOptions={sizeOptions}
+            toppingOptions={toppingOptions}
+          />
 
           {/* Total */}
           <div className="mb-8">
             <div className="text-2xl font-bold text-orange-500">
-              Tổng cộng: {calculateTotalPrice().toLocaleString('vi-VN')} ₫
+              Tổng cộng: {calculateTotalPrice.toLocaleString('vi-VN')} ₫
             </div>
           </div>
 
@@ -271,7 +187,7 @@ export default function ProductDetailPage() {
                   </button>
                 </div>
                 <div className="font-bold text-orange-500">
-                  {calculateTotalPrice().toLocaleString('vi-VN')} ₫
+                  {calculateTotalPrice.toLocaleString('vi-VN')} ₫
                 </div>
               </div>
             </div>
@@ -281,7 +197,7 @@ export default function ProductDetailPage() {
           <div className="space-y-4">
             {/* Total */}
             <div className="text-2xl font-bold text-orange-500 text-center">
-              Tổng cộng: {calculateTotalPrice().toLocaleString('vi-VN')} ₫
+              Tổng cộng: {calculateTotalPrice.toLocaleString('vi-VN')} ₫
             </div>
 
             {/* Checkout Button */}
