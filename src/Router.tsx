@@ -21,7 +21,7 @@ export default function Router() {
         <Route path="/pos" element={<POSKioskApp />} />
         
         {/* Product Detail Page */}
-        <Route path="/product/:productId" element={<ProductDetailPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         
         {/* Checkout Page */}
         <Route path="/checkout" element={<CheckoutPage />} />

@@ -391,3 +391,36 @@ export interface KioskStats {
     revenue: number;
   }>;
 }
+
+// Enhanced Product Types for new implementation
+export interface Size {
+  name: string;
+  extraPrice: number;
+}
+
+export interface Topping {
+  name: string;
+  extraPrice: number;
+}
+
+export interface CartItemNew {
+  id: string;
+  productId: number;
+  name: string;
+  image: string;
+  basePrice: number;
+  selectedSize?: Size;
+  selectedToppings: Topping[];
+  note: string;
+  quantity: number;
+  totalPrice: number;
+}
+
+export interface CustomerInfo {
+  name: string;
+  phone: string;
+  table: string;
+  notes: string;
+}
+
+export type PaymentMethodType = 'cash' | 'card' | 'qr';

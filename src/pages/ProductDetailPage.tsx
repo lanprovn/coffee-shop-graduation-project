@@ -1,80 +1,94 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useProduct } from '@/hooks/useProduct';
-import { useShoppingCart } from '@/hooks/useShoppingCart';
-import { CoffeeProduct } from '@/types';
-import { 
-  MinusIcon,
-  PlusIcon,
-  ShoppingCartIcon
-} from '@heroicons/react/24/outline';
-import ProductCustomizer from '@/components/ProductCustomizer';
-import { getProductTotalPrice } from '@/utils/pricing';
+import type { Size, Topping } from '@/types';
+import { useProducts } from '@/hooks/useProducts';
+import { useCart } from '@/hooks/useCart';
+import { StarIcon } from '@heroicons/react/24/solid';
+import { formatPrice } from '@/utils/formatPrice';
 
-export default function ProductDetailPage() {
-  const { productId } = useParams<{ productId: string }>();
+const ProductDetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { products } = useProduct();
-  const { addToCart } = useShoppingCart();
+  const { products } = useProducts();
+  const { addToCart } = useCart();
   
-  const [selectedSize, setSelectedSize] = useState('Nhỏ');
-  const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
+  const [selectedSize, setSelectedSize] = useState<Size | undefined>(undefined);
+  const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
   const [quantity, setQuantity] = useState(1);
-  const [notes, setNotes] = useState('');
+  const [note, setNote] = useState('');
 
-  // Find product by ID
-  const product = products?.find(p => p.id === productId);
+  const product = products.find(p => p.id === id);
 
-  const sizeOptions = [
-    { name: 'Nhỏ', price: 0 },
-    { name: 'Vừa', price: 5000 },
-    { name: 'Lớn', price: 10000 }
-  ];
+  // Initialize with first size if available
+  useEffect(() => {
+    if (product?.sizes && product.sizes.length > 0 && !selectedSize) {
+      setSelectedSize({
+        name: product.sizes[0].name,
+        extraPrice: product.sizes[0].price
+      });
+    }
+  }, [product?.sizes, selectedSize]);
 
-  const toppingOptions = [
-    { name: 'Thêm đường', price: 0 },
-    { name: 'Thêm sữa', price: 3000 },
-    { name: 'Kem tươi', price: 5000 },
-    { name: 'Caramel', price: 8000 }
-  ];
-
-  // Calculate total price using helper function
-  const calculateTotalPrice = useMemo(() => {
+  const calculateTotalPrice = () => {
     if (!product) return 0;
-    return getProductTotalPrice(
-      product.price,
+    const base = product.price;
+    const sizePrice = selectedSize?.extraPrice || 0;
+    const toppingPrice = selectedToppings.reduce((sum, t) => sum + t.extraPrice, 0);
+    return (base + sizePrice + toppingPrice) * quantity;
+  };
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    
+    const totalPrice = calculateTotalPrice();
+    
+    addToCart({
+      productId: parseInt(product.id),
+      name: product.displayName,
+      image: product.image,
+      basePrice: product.price,
       selectedSize,
       selectedToppings,
-      sizeOptions,
-      toppingOptions
-    );
-  }, [product, selectedSize, selectedToppings]);
-
-  const handleAddToCart = useCallback(() => {
-    if (!product) return;
-
-    // Create a custom product with size and toppings
-    const customProduct: CoffeeProduct = {
-      ...product,
-      displayName: `${product.displayName} (${selectedSize})`,
-      price: calculateTotalPrice
-    };
+      note,
+      quantity,
+      totalPrice,
+    });
     
-    // Add to cart
-    addToCart(customProduct, quantity);
-    
-    // Navigate back to POS
-    navigate('/pos');
-  }, [product, selectedSize, calculateTotalPrice, quantity, addToCart, navigate]);
+    // Reset form
+    setSelectedSize(product.sizes?.[0] ? {
+      name: product.sizes[0].name,
+      extraPrice: product.sizes[0].price
+    } : undefined);
+    setSelectedToppings([]);
+    setQuantity(1);
+    setNote('');
+  };
+
+  const handleToppingToggle = (topping: Topping) => {
+    setSelectedToppings(prev => {
+      const isSelected = prev.some(t => t.name === topping.name);
+      if (isSelected) {
+        return prev.filter(t => t.name !== topping.name);
+      } else {
+        return [...prev, topping];
+      }
+    });
+  };
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full h-full flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy sản phẩm</h2>
+          <div className="text-6xl mb-6">❌</div>
+          <h2 className="text-xl font-semibold text-gray-600 mb-3">
+            Không tìm thấy sản phẩm
+          </h2>
+          <p className="text-gray-500 mb-6">
+            Sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.
+          </p>
           <button
             onClick={() => navigate('/pos')}
-            className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
           >
             Quay lại POS
           </button>
@@ -83,133 +97,189 @@ export default function ProductDetailPage() {
     );
   }
 
+  // Mock sizes and toppings for demonstration
+  const mockSizes: Size[] = [
+    { name: 'Nhỏ', extraPrice: 0 },
+    { name: 'Vừa', extraPrice: 5000 },
+    { name: 'Lớn', extraPrice: 10000 }
+  ];
+
+  const mockToppings: Topping[] = [
+    { name: 'Thêm đường', extraPrice: 0 },
+    { name: 'Thêm sữa', extraPrice: 3000 },
+    { name: 'Kem tươi', extraPrice: 5000 },
+    { name: 'Caramel', extraPrice: 8000 }
+  ];
+
   return (
-    <div className="min-h-screen flex bg-white">
-      {/* Left Side - Product Image */}
-      <div className="w-1/3 bg-white flex items-center justify-center p-8">
-        <div className="w-full max-w-md">
-          <div className="aspect-square bg-orange-500 rounded-2xl overflow-hidden shadow-2xl">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
+    <div className="w-full">
+      {/* Mobile Category Filter */}
+      <div className="lg:hidden mb-6">
+        <div className="flex overflow-x-auto pb-2">
+          <button
+            onClick={() => {}}
+            className="flex-shrink-0 px-4 py-2 rounded-full mr-2 transition-all duration-300 bg-orange-500 text-white"
+          >
+            Chi tiết sản phẩm
+          </button>
         </div>
       </div>
 
-      {/* Center - Product Customization */}
-      <div className="flex-1 bg-white flex flex-col justify-center p-8">
-        <div className="max-w-2xl mx-auto w-full">
-          <ProductCustomizer
-            selectedSize={selectedSize}
-            setSelectedSize={setSelectedSize}
-            selectedToppings={selectedToppings}
-            setSelectedToppings={setSelectedToppings}
-            quantity={quantity}
-            setQuantity={setQuantity}
-            notes={notes}
-            setNotes={setNotes}
-            sizeOptions={sizeOptions}
-            toppingOptions={toppingOptions}
-          />
-
-          {/* Total */}
-          <div className="mb-8">
-            <div className="text-2xl font-bold text-orange-500">
-              Tổng cộng: {calculateTotalPrice.toLocaleString('vi-VN')} ₫
+      {/* Product Detail Content */}
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Product Image */}
+          <div className="space-y-4">
+            <div className="aspect-square rounded-xl overflow-hidden bg-gray-100">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/images/coffee/coffee-black.webp';
+                }}
+              />
             </div>
           </div>
 
-          {/* Add to Cart Button */}
-          <div>
+          {/* Product Info */}
+          <div className="space-y-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                {product.displayName}
+              </h1>
+              
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="flex items-center">
+                  <StarIcon className="h-5 w-5 text-yellow-400 mr-1" />
+                  <span className="text-gray-600 font-medium">
+                    {product.rating} • Highland Coffee
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-gray-600 mb-6">
+                {product.description}
+              </p>
+            </div>
+
+            {/* Price */}
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-orange-500">
+                {formatPrice(product.price)}
+              </div>
+            </div>
+
+            {/* Size Selection */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">Chọn size</h3>
+              <div className="grid grid-cols-3 gap-3">
+                {mockSizes.map((size) => (
+                  <button
+                    key={size.name}
+                    onClick={() => setSelectedSize(size)}
+                    className={`p-3 rounded-lg border-2 transition-colors ${
+                      selectedSize?.name === size.name
+                        ? 'border-orange-500 bg-orange-50 text-orange-600'
+                        : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                    }`}
+                  >
+                    <div className="font-semibold text-sm">{size.name}</div>
+                    {size.extraPrice > 0 && (
+                      <div className="text-xs text-gray-500">
+                        +{formatPrice(size.extraPrice)}
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Topping Selection */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">Chọn topping</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {mockToppings.map((topping) => {
+                  const isSelected = selectedToppings.some(t => t.name === topping.name);
+                  return (
+                    <button
+                      key={topping.name}
+                      onClick={() => handleToppingToggle(topping)}
+                      className={`p-3 rounded-lg border-2 transition-colors text-left ${
+                        isSelected
+                          ? 'border-orange-500 bg-orange-50 text-orange-600'
+                          : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                      }`}
+                    >
+                      <div className="font-semibold text-sm">{topping.name}</div>
+                      {topping.extraPrice > 0 && (
+                        <div className="text-xs text-gray-500">
+                          +{formatPrice(topping.extraPrice)}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Quantity Selection */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">Số lượng</h3>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-600 transition-colors duration-200"
+                >
+                  -
+                </button>
+                <span className="text-lg font-semibold text-gray-800 min-w-[3rem] text-center">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-600 transition-colors duration-200"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Note */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">Ghi chú đặc biệt</h3>
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Ví dụ: Không cay, ít đường..."
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors resize-none"
+                rows={3}
+              />
+            </div>
+
+            {/* Total Price */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-semibold text-gray-800">Tổng cộng:</span>
+                <span className="text-2xl font-bold text-orange-500">
+                  {formatPrice(calculateTotalPrice())}
+                </span>
+              </div>
+            </div>
+
+            {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-6 rounded-lg text-lg transition-colors shadow-md hover:shadow-lg"
             >
-              <ShoppingCartIcon className="w-6 h-6" />
-              <span>Thêm vào giỏ hàng</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Side - Cart Preview */}
-      <div className="w-80 bg-gray-50 flex flex-col">
-        <div className="p-6 border-b border-gray-200 flex-shrink-0">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-gray-900 flex items-center">
-              <span className="mr-2">🛒</span>
-              Giỏ hàng
-            </h3>
-            <div className="bg-red-500 text-white px-2 py-1 rounded-full text-sm font-bold">
-              {quantity} món
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 p-6 flex flex-col justify-between">
-          {/* Product Preview */}
-          <div className="space-y-4">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-gray-900">{product.displayName}</div>
-                  <div className="text-sm text-gray-600">Size: {selectedSize}</div>
-                  {selectedToppings.length > 0 && (
-                    <div className="text-sm text-gray-600">
-                      Topping: {selectedToppings.join(', ')}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-1 bg-gray-100 hover:bg-gray-200 rounded"
-                  >
-                    <MinusIcon className="w-4 h-4" />
-                  </button>
-                  <span className="font-semibold">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="p-1 bg-gray-100 hover:bg-gray-200 rounded"
-                  >
-                    <PlusIcon className="w-4 h-4" />
-                  </button>
-                </div>
-                <div className="font-bold text-orange-500">
-                  {calculateTotalPrice.toLocaleString('vi-VN')} ₫
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Section - Total and Checkout */}
-          <div className="space-y-4">
-            {/* Total */}
-            <div className="text-2xl font-bold text-orange-500 text-center">
-              Tổng cộng: {calculateTotalPrice.toLocaleString('vi-VN')} ₫
-            </div>
-
-            {/* Checkout Button */}
-            <button
-              onClick={() => navigate('/checkout')}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
-            >
-              <span>Thanh toán</span>
+              Thêm vào giỏ hàng
             </button>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProductDetailPage;
