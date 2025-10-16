@@ -102,183 +102,153 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      {/* Left Side - Categories (Empty for now) */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-        <div className="p-4 border-b border-gray-200">
-          <button
-            onClick={() => navigate('/pos')}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeftIcon className="w-5 h-5" />
-            <span>Quay lại POS</span>
-          </button>
-        </div>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Danh mục</h3>
-          <div className="space-y-2">
-            <div className="p-3 bg-orange-50 border border-orange-200 rounded-lg">
-              <span className="text-orange-700 font-medium">Chi tiết sản phẩm</span>
-            </div>
+    <div className="min-h-screen flex bg-white">
+      {/* Left Side - Product Image */}
+      <div className="w-1/3 bg-white flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          <div className="aspect-square bg-orange-500 rounded-2xl overflow-hidden shadow-2xl">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>
 
-      {/* Center - Product Details */}
-      <div className="flex-1 bg-white flex flex-col min-w-0">
-        {/* Header */}
-        <div className="p-4 border-b border-gray-200 flex-shrink-0">
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">{product.displayName}</h1>
-          <p className="text-gray-600 mt-2">Chọn size, topping và số lượng cho sản phẩm</p>
-        </div>
+      {/* Center - Product Customization */}
+      <div className="flex-1 bg-white flex flex-col justify-center p-8">
+        <div className="max-w-2xl mx-auto w-full">
 
-        {/* Product Content */}
-        <div className="flex-1 overflow-y-auto p-4 lg:p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-          <div className="max-w-4xl mx-auto">
-            {/* Product Image */}
-            <div className="mb-6 lg:mb-8">
-              <div className="aspect-square bg-orange-100 rounded-xl lg:rounded-2xl overflow-hidden max-w-md mx-auto">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Product Info */}
-            <div className="space-y-6">
-              <div className="flex items-center space-x-2">
-                <span className="text-yellow-500 text-lg">★</span>
-                <span className="text-lg font-semibold">{product.rating}</span>
-                <span className="text-gray-600">Highland Coffee</span>
-              </div>
-
-              <p className="text-gray-600 text-lg">{product.description}</p>
-
-              <div className="text-3xl font-bold text-orange-500">
-                {calculateTotalPrice().toLocaleString('vi-VN')} ₫
-              </div>
-            </div>
-
-            {/* Size Selection */}
-            <div className="mt-6 lg:mt-8">
-              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Chọn size</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
-                {sizeOptions.map((size) => (
-                  <button
-                    key={size.name}
-                    onClick={() => setSelectedSize(size.name)}
-                    className={`p-3 lg:p-4 rounded-xl border-2 transition-all ${
-                      selectedSize === size.name
-                        ? 'border-orange-500 bg-orange-50 text-orange-700'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    <div className="font-semibold">{size.name}</div>
-                    {size.price > 0 && (
-                      <div className="text-sm text-gray-600">+{size.price.toLocaleString('vi-VN')} ₫</div>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Topping Selection */}
-            <div className="mt-6 lg:mt-8">
-              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Chọn topping</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
-                {toppingOptions.map((topping) => (
-                  <button
-                    key={topping.name}
-                    onClick={() => toggleTopping(topping.name)}
-                    className={`p-3 lg:p-4 rounded-xl border-2 transition-all ${
-                      selectedToppings.includes(topping.name)
-                        ? 'border-orange-500 bg-orange-50 text-orange-700'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    <div className="font-semibold">{topping.name}</div>
-                    {topping.price > 0 && (
-                      <div className="text-sm text-gray-600">+{topping.price.toLocaleString('vi-VN')} ₫</div>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Quantity */}
-            <div className="mt-6 lg:mt-8">
-              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Số lượng</h3>
-              <div className="flex items-center justify-center space-x-4">
+          {/* Size Selection */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Chọn size</h3>
+            <div className="grid grid-cols-3 gap-4">
+              {sizeOptions.map((size) => (
                 <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                  key={size.name}
+                  onClick={() => setSelectedSize(size.name)}
+                  className={`p-4 rounded-xl border-2 transition-all ${
+                    selectedSize === size.name
+                      ? 'border-orange-500 bg-white text-orange-700'
+                      : 'border-gray-200 hover:border-gray-300 bg-gray-50'
+                  }`}
                 >
-                  <MinusIcon className="w-5 h-5" />
+                  <div className="font-semibold text-lg">{size.name}</div>
+                  {size.price > 0 && (
+                    <div className="text-sm text-gray-600 mt-1">+{size.price.toLocaleString('vi-VN')} ₫</div>
+                  )}
                 </button>
-                <span className="text-2xl font-bold px-4">{quantity}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Topping Selection */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Chọn topping</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {toppingOptions.map((topping) => (
                 <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                  key={topping.name}
+                  onClick={() => toggleTopping(topping.name)}
+                  className={`p-4 rounded-xl border-2 transition-all ${
+                    selectedToppings.includes(topping.name)
+                      ? 'border-orange-500 bg-white text-orange-700'
+                      : 'border-gray-200 hover:border-gray-300 bg-gray-50'
+                  }`}
                 >
-                  <PlusIcon className="w-5 h-5" />
+                  <div className="font-semibold text-lg">{topping.name}</div>
+                  {topping.price > 0 && (
+                    <div className="text-sm text-gray-600 mt-1">+{topping.price.toLocaleString('vi-VN')} ₫</div>
+                  )}
                 </button>
-              </div>
+              ))}
             </div>
+          </div>
 
-            {/* Special Notes */}
-            <div className="mt-6 lg:mt-8">
-              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Ghi chú đặc biệt</h3>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Ví dụ: Không cay, ít đường..."
-                className="w-full p-3 lg:p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                rows={3}
-              />
-            </div>
-
-            {/* Add to Cart Button - Center */}
-            <div className="mt-6 lg:mt-8">
+          {/* Quantity */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Số lượng</h3>
+            <div className="flex items-center justify-center space-x-4">
               <button
-                onClick={handleAddToCart}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 lg:py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-base lg:text-lg"
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors flex items-center justify-center"
               >
-                <ShoppingCartIcon className="w-5 h-5 lg:w-6 lg:h-6" />
-                <span>Thêm vào giỏ hàng</span>
+                <MinusIcon className="w-6 h-6" />
+              </button>
+              <span className="text-3xl font-bold px-6">{quantity}</span>
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                className="w-12 h-12 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors flex items-center justify-center"
+              >
+                <PlusIcon className="w-6 h-6" />
               </button>
             </div>
+          </div>
+
+          {/* Special Notes */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Ghi chú đặc biệt</h3>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Ví dụ: Không cay, ít đường..."
+              className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              rows={3}
+            />
+          </div>
+
+          {/* Total */}
+          <div className="mb-8">
+            <div className="text-2xl font-bold text-orange-500">
+              Tổng cộng: {calculateTotalPrice().toLocaleString('vi-VN')} ₫
+            </div>
+          </div>
+
+          {/* Add to Cart Button */}
+          <div>
+            <button
+              onClick={handleAddToCart}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
+            >
+              <ShoppingCartIcon className="w-6 h-6" />
+              <span>Thêm vào giỏ hàng</span>
+            </button>
           </div>
         </div>
       </div>
 
       {/* Right Side - Cart Preview */}
-      <div className="w-72 lg:w-80 bg-gray-50 flex flex-col flex-shrink-0">
-        <div className="p-4 lg:p-6 border-b border-gray-200 flex-shrink-0">
-          <h3 className="text-lg lg:text-xl font-bold text-gray-900 flex items-center">
-            <span className="mr-2">🛒</span>
-            Giỏ hàng
-          </h3>
+      <div className="w-80 bg-gray-50 flex flex-col">
+        <div className="p-6 border-b border-gray-200 flex-shrink-0">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-bold text-gray-900 flex items-center">
+              <span className="mr-2">🛒</span>
+              Giỏ hàng
+            </h3>
+            <div className="bg-red-500 text-white px-2 py-1 rounded-full text-sm font-bold">
+              {quantity} món
+            </div>
+          </div>
         </div>
 
-        <div className="flex-1 p-4 lg:p-6 flex flex-col justify-between">
+        <div className="flex-1 p-6 flex flex-col justify-between">
           {/* Product Preview */}
           <div className="space-y-4">
-            <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm">
+            <div className="bg-white rounded-xl p-4 shadow-sm">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-orange-100 rounded-lg overflow-hidden">
+                <div className="w-12 h-12 bg-orange-100 rounded-lg overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-gray-900 text-sm lg:text-base truncate">{product.displayName}</div>
-                  <div className="text-xs lg:text-sm text-gray-600">Size: {selectedSize}</div>
+                <div className="flex-1">
+                  <div className="font-semibold text-gray-900">{product.displayName}</div>
+                  <div className="text-sm text-gray-600">Size: {selectedSize}</div>
                   {selectedToppings.length > 0 && (
-                    <div className="text-xs lg:text-sm text-gray-600 truncate">
+                    <div className="text-sm text-gray-600">
                       Topping: {selectedToppings.join(', ')}
                     </div>
                   )}
@@ -290,37 +260,36 @@ export default function ProductDetailPage() {
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="p-1 bg-gray-100 hover:bg-gray-200 rounded"
                   >
-                    <MinusIcon className="w-3 h-3 lg:w-4 lg:h-4" />
+                    <MinusIcon className="w-4 h-4" />
                   </button>
-                  <span className="font-semibold text-sm lg:text-base">{quantity}</span>
+                  <span className="font-semibold">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
                     className="p-1 bg-gray-100 hover:bg-gray-200 rounded"
                   >
-                    <PlusIcon className="w-3 h-3 lg:w-4 lg:h-4" />
+                    <PlusIcon className="w-4 h-4" />
                   </button>
                 </div>
-                <div className="font-bold text-orange-500 text-sm lg:text-base">
+                <div className="font-bold text-orange-500">
                   {calculateTotalPrice().toLocaleString('vi-VN')} ₫
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Section - Total and Add to Cart */}
+          {/* Bottom Section - Total and Checkout */}
           <div className="space-y-4">
             {/* Total */}
-            <div className="text-lg lg:text-2xl font-bold text-orange-500 text-center">
+            <div className="text-2xl font-bold text-orange-500 text-center">
               Tổng cộng: {calculateTotalPrice().toLocaleString('vi-VN')} ₫
             </div>
 
-            {/* Add to Cart Button */}
+            {/* Checkout Button */}
             <button
-              onClick={handleAddToCart}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 lg:py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-sm lg:text-base"
+              onClick={() => navigate('/checkout')}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
             >
-              <ShoppingCartIcon className="w-4 h-4 lg:w-5 lg:h-5" />
-              <span>Thêm vào giỏ hàng</span>
+              <span>Thanh toán</span>
             </button>
           </div>
         </div>
