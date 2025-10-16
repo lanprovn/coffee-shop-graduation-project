@@ -102,19 +102,19 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="h-screen flex bg-gray-100">
+    <div className="min-h-screen flex bg-gray-100">
       {/* Left Side - Categories (Empty for now) */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-6 border-b border-gray-200">
+      <div className="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+        <div className="p-4 border-b border-gray-200">
           <button
             onClick={() => navigate('/pos')}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
           >
             <ArrowLeftIcon className="w-5 h-5" />
             <span>Quay lại POS</span>
           </button>
         </div>
-        <div className="p-6">
+        <div className="p-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Danh mục</h3>
           <div className="space-y-2">
             <div className="p-3 bg-orange-50 border border-orange-200 rounded-lg">
@@ -125,19 +125,19 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Center - Product Details */}
-      <div className="flex-1 bg-white flex flex-col">
+      <div className="flex-1 bg-white flex flex-col min-w-0">
         {/* Header */}
-        <div className="p-6 border-b border-gray-200 flex-shrink-0">
-          <h1 className="text-3xl font-bold text-gray-900">{product.displayName}</h1>
+        <div className="p-4 border-b border-gray-200 flex-shrink-0">
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">{product.displayName}</h1>
           <p className="text-gray-600 mt-2">Chọn size, topping và số lượng cho sản phẩm</p>
         </div>
 
         {/* Product Content */}
-        <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+        <div className="flex-1 overflow-y-auto p-4 lg:p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
           <div className="max-w-4xl mx-auto">
             {/* Product Image */}
-            <div className="mb-8">
-              <div className="aspect-square bg-orange-100 rounded-2xl overflow-hidden">
+            <div className="mb-6 lg:mb-8">
+              <div className="aspect-square bg-orange-100 rounded-xl lg:rounded-2xl overflow-hidden max-w-md mx-auto">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -162,14 +162,14 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Size Selection */}
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Chọn size</h3>
-              <div className="grid grid-cols-3 gap-4">
+            <div className="mt-6 lg:mt-8">
+              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Chọn size</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
                 {sizeOptions.map((size) => (
                   <button
                     key={size.name}
                     onClick={() => setSelectedSize(size.name)}
-                    className={`p-4 rounded-xl border-2 transition-all ${
+                    className={`p-3 lg:p-4 rounded-xl border-2 transition-all ${
                       selectedSize === size.name
                         ? 'border-orange-500 bg-orange-50 text-orange-700'
                         : 'border-gray-200 hover:border-gray-300'
@@ -185,14 +185,14 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Topping Selection */}
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Chọn topping</h3>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="mt-6 lg:mt-8">
+              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Chọn topping</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
                 {toppingOptions.map((topping) => (
                   <button
                     key={topping.name}
                     onClick={() => toggleTopping(topping.name)}
-                    className={`p-4 rounded-xl border-2 transition-all ${
+                    className={`p-3 lg:p-4 rounded-xl border-2 transition-all ${
                       selectedToppings.includes(topping.name)
                         ? 'border-orange-500 bg-orange-50 text-orange-700'
                         : 'border-gray-200 hover:border-gray-300'
@@ -208,9 +208,9 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Quantity */}
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Số lượng</h3>
-              <div className="flex items-center space-x-4">
+            <div className="mt-6 lg:mt-8">
+              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Số lượng</h3>
+              <div className="flex items-center justify-center space-x-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
@@ -228,24 +228,24 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Special Notes */}
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Ghi chú đặc biệt</h3>
+            <div className="mt-6 lg:mt-8">
+              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-4">Ghi chú đặc biệt</h3>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Ví dụ: Không cay, ít đường..."
-                className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full p-3 lg:p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 rows={3}
               />
             </div>
 
             {/* Add to Cart Button - Center */}
-            <div className="mt-8">
+            <div className="mt-6 lg:mt-8">
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 lg:py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-base lg:text-lg"
               >
-                <ShoppingCartIcon className="w-6 h-6" />
+                <ShoppingCartIcon className="w-5 h-5 lg:w-6 lg:h-6" />
                 <span>Thêm vào giỏ hàng</span>
               </button>
             </div>
@@ -254,31 +254,31 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Right Side - Cart Preview */}
-      <div className="w-80 bg-gray-50 flex flex-col">
-        <div className="p-6 border-b border-gray-200 flex-shrink-0">
-          <h3 className="text-xl font-bold text-gray-900 flex items-center">
+      <div className="w-72 lg:w-80 bg-gray-50 flex flex-col flex-shrink-0">
+        <div className="p-4 lg:p-6 border-b border-gray-200 flex-shrink-0">
+          <h3 className="text-lg lg:text-xl font-bold text-gray-900 flex items-center">
             <span className="mr-2">🛒</span>
             Giỏ hàng
           </h3>
         </div>
 
-        <div className="flex-1 p-6 flex flex-col justify-between">
+        <div className="flex-1 p-4 lg:p-6 flex flex-col justify-between">
           {/* Product Preview */}
           <div className="space-y-4">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
+            <div className="bg-white rounded-xl p-3 lg:p-4 shadow-sm">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg overflow-hidden">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-orange-100 rounded-lg overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-gray-900">{product.displayName}</div>
-                  <div className="text-sm text-gray-600">Size: {selectedSize}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-gray-900 text-sm lg:text-base truncate">{product.displayName}</div>
+                  <div className="text-xs lg:text-sm text-gray-600">Size: {selectedSize}</div>
                   {selectedToppings.length > 0 && (
-                    <div className="text-sm text-gray-600">
+                    <div className="text-xs lg:text-sm text-gray-600 truncate">
                       Topping: {selectedToppings.join(', ')}
                     </div>
                   )}
@@ -290,17 +290,17 @@ export default function ProductDetailPage() {
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="p-1 bg-gray-100 hover:bg-gray-200 rounded"
                   >
-                    <MinusIcon className="w-4 h-4" />
+                    <MinusIcon className="w-3 h-3 lg:w-4 lg:h-4" />
                   </button>
-                  <span className="font-semibold">{quantity}</span>
+                  <span className="font-semibold text-sm lg:text-base">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
                     className="p-1 bg-gray-100 hover:bg-gray-200 rounded"
                   >
-                    <PlusIcon className="w-4 h-4" />
+                    <PlusIcon className="w-3 h-3 lg:w-4 lg:h-4" />
                   </button>
                 </div>
-                <div className="font-bold text-orange-500">
+                <div className="font-bold text-orange-500 text-sm lg:text-base">
                   {calculateTotalPrice().toLocaleString('vi-VN')} ₫
                 </div>
               </div>
@@ -310,16 +310,16 @@ export default function ProductDetailPage() {
           {/* Bottom Section - Total and Add to Cart */}
           <div className="space-y-4">
             {/* Total */}
-            <div className="text-2xl font-bold text-orange-500 text-center">
+            <div className="text-lg lg:text-2xl font-bold text-orange-500 text-center">
               Tổng cộng: {calculateTotalPrice().toLocaleString('vi-VN')} ₫
             </div>
 
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-lg"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 lg:py-4 rounded-xl transition-colors flex items-center justify-center space-x-2 text-sm lg:text-base"
             >
-              <ShoppingCartIcon className="w-6 h-6" />
+              <ShoppingCartIcon className="w-4 h-4 lg:w-5 lg:h-5" />
               <span>Thêm vào giỏ hàng</span>
             </button>
           </div>
